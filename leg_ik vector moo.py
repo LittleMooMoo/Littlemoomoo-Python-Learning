@@ -1,17 +1,15 @@
-from quadruped_leg_ik import leg_ik
+# This code is for moo moo cow to practice math
+from quadruped_leg_ik import clamp, leg_ik
 import numpy as np
 
 
-def leg_cartesian_coordinate(x, y, z):
-    return np.array([x, y, z])
+def leg_polar_coordinate(x, y, z):
 
+    theta_h_rad_raw, theta_t_rad_raw, theta_s_rad_raw = leg_ik(x, y, z)
 
-def leg_polar_coordinate(theta_h_rad, theta_t_rad, theta_s_rad):
-
-    theta_h_rad, _, _ = leg_ik(x, y, z)
-    _, theta_t_rad, _ = leg_ik(x, y, z)
-    _, _, theta_s_rad = leg_ik(x, y, z)
-
+    theta_h_rad = clamp(theta_h_rad_raw, -np.pi, np.pi)
+    theta_t_rad = clamp(theta_t_rad_raw, -np.pi, np.pi)
+    theta_s_rad = clamp(theta_s_rad_raw, -np.pi, np.pi)
     return np.array([theta_h_rad, theta_t_rad, theta_s_rad])
 
 
@@ -33,8 +31,28 @@ x = input_x
 y = input_y
 z = input_z
 
-Calculated_polar_coordinates = leg_polar_coordinate(x, y, z)
-print("polar coordinates:", Calculated_polar_coordinates)
+calculated_polar_coordinates = leg_polar_coordinate(x, y, z)
+print("polar coordinates:", calculated_polar_coordinates)
 
-polar_coordiantes_deg = np.degrees(Calculated_polar_coordinates)
+polar_coordiantes_deg = np.degrees(calculated_polar_coordinates)
 print("Polar Coordinates (degrees):", polar_coordiantes_deg)
+
+target_polar_coordinates_deg = np.array([0, 45, 90])
+
+
+def position_error(target_polar_coordinates_deg, polar_coordinates_deg):
+
+    error_raw = target_polar_coordinates_deg - polar_coordinates_deg
+
+    filtered_error = abs(error_raw)
+
+    return error_raw, filtered_error
+
+
+error_raw, filtered_error = position_error(
+    target_polar_coordinates_deg, polar_coordiantes_deg)
+
+if np.any(np.abs(error_raw) > 25):
+    print("Error exceeds threshold, unreachable")
+else:
+    print("position is reachable, error within threshold: ", filtered_error)
