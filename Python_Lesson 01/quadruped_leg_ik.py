@@ -7,11 +7,6 @@ L_T = 270.0
 L_S = 270.0
 
 
-def clamp(value, low, high):
-    """Clamp value to the interval [low, high]."""
-    return max(low, min(high, value))
-
-
 def leg_ik(x, y, z):
     """Return hip, thigh, and shank joint angles in radians."""
 
