@@ -2,3 +2,29 @@ __pycache__/
 *.py[cod]
 .mypy_cache/
 .venv/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+
+# C/C++ build outputs
+*.exe
+*.obj
+*.o
+*.ilk
+*.pdb
+*.dll
+*.lib
+*.a
+*.so
+*.dylib
+*.out
+build/
+cmake-build-*/
+
+# Visual Studio generated files
+*.sln
+*.vcxproj.user
+*.ipch
+.vs/
