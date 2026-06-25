@@ -289,6 +289,273 @@ In our whole-robot code, we usually use `transmit_pdo_2()` instead of
 `write_read_pdo_2()` because reading every motor immediately can slow down the
 control loop. We do tracking checks separately.
 
+### Command-Line Helper
+
+The local Recoil wrapper also exposes a small `argparse` helper:
+
+```python
+args = recoil.get_args()
+```
+
+It is defined in `recoil/util.py` and is roughly:
+
+```python
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--channel", type=str, default="can0")
+    parser.add_argument("-i", "--id", type=int, default=1)
+    return parser.parse_args()
+```
+
+Use it for very small scripts that only need a CAN channel and one motor ID:
+
+```python
+args = recoil.get_args()
+bus = recoil.Bus(channel=args.channel, bitrate=1000000)
+motor_id = args.id
+```
+
+Then run:
+
+```powershell
+python ping_motor.py -c can1 -i 3
+```
+
+If your script needs extra options such as `--delta_raw`, `--move_time`,
+`--kp`, `--kd`, or `--torque_limit`, write your own `argparse` function instead
+of using `recoil.get_args()`.
+
+### Raw Frame And Debug Helpers
+
+Most robot code should use named helpers such as `set_mode()`,
+`write_position_kp()`, and `transmit_pdo_2()`. The package also exposes raw
+helpers for debugging or building new protocol functions.
+
+| Helper | Purpose | Beginner rule |
+| --- | --- | --- |
+| `recoil.DataFrame(device_id, func_id, size, data)` | Generic frame container. | Read only unless debugging protocol details. |
+| `recoil.CANFrame(device_id, func_id, size, data)` | CAN-specific frame container, max 8 data bytes. | Useful for understanding what helpers send. |
+| `bus.transmit(frame)` | Sends one raw CAN frame. | Prefer named functions for motor control. |
+| `bus.receive(filter_device_id=None, filter_function=None, timeout=None)` | Receives one CAN frame, optionally filtered. | Useful for diagnostics. |
+| `bus.unpack(format_str, data)` | Safe wrapper around `struct.unpack`. | Used internally when decoding bytes. |
+
+Example: `ping()` is built from these raw pieces. It sends one byte, `0xCA`,
+then waits for the controller to send back the same byte.
+
+```python
+bus.transmit(
+    recoil.CANFrame(
+        device_id,
+        recoil.Function.RECEIVE_PDO_1,
+        size=1,
+        data=b"\xCA",
+    )
+)
+```
+
+### Protocol Constants
+
+The package exposes several constant classes. These are not functions, but they
+are important when reading the source or building advanced tools.
+
+| Class | What it stores | Examples |
+| --- | --- | --- |
+| `recoil.Function` | CAN function IDs, meaning message categories. | `NMT`, `RECEIVE_PDO_2`, `TRANSMIT_SDO`, `HEARTBEAT` |
+| `recoil.Mode` | Controller mode values. | `IDLE`, `DAMPING`, `POSITION`, `TORQUE`, `VELOCITY` |
+| `recoil.ErrorCode` | Firmware error bit masks. | `WATCHDOG_TIMEOUT`, `OVER_CURRENT`, `OVER_TEMPERATURE` |
+| `recoil.Parameter` | Firmware parameter addresses. | `POSITION_CONTROLLER_POSITION_KP`, `ENCODER_CPR` |
+
+Useful `Function` names:
+
+```python
+recoil.Function.NMT
+recoil.Function.RECEIVE_PDO_1
+recoil.Function.TRANSMIT_PDO_1
+recoil.Function.RECEIVE_PDO_2
+recoil.Function.TRANSMIT_PDO_2
+recoil.Function.RECEIVE_SDO
+recoil.Function.TRANSMIT_SDO
+recoil.Function.FLASH
+recoil.Function.HEARTBEAT
+```
+
+Useful `ErrorCode` names:
+
+```python
+recoil.ErrorCode.NO_ERROR
+recoil.ErrorCode.ESTOP
+recoil.ErrorCode.CALIBRATION_ERROR
+recoil.ErrorCode.INVALID_MODE
+recoil.ErrorCode.WATCHDOG_TIMEOUT
+recoil.ErrorCode.OVER_VOLTAGE
+recoil.ErrorCode.OVER_CURRENT
+recoil.ErrorCode.OVER_TEMPERATURE
+recoil.ErrorCode.CAN_TX_FAULT
+```
+
+There is not currently a named public `read_error()` helper in this wrapper.
+If we need one later, it would read `recoil.Parameter.ERROR` through the generic
+parameter helpers.
+
+### Complete Python API Quick Index
+
+This index is useful when you are typing `bus.` in VS Code and wondering what
+belongs to this wrapper.
+
+Bus lifecycle and raw CAN:
+
+```python
+recoil.Bus(channel: str, bitrate: int = 1000000)
+bus.stop()
+bus.receive(filter_device_id=None, filter_function=None, timeout=None)
+bus.transmit(frame)
+bus.unpack(format_str, data)
+```
+
+Health, mode, and flash:
+
+```python
+bus.ping(device_id, timeout=0.1) -> bool
+bus.feed(device_id) -> None
+bus.set_mode(device_id, mode) -> None
+bus.load_settings_from_flash(device_id) -> None
+bus.store_settings_to_flash(device_id) -> None
+```
+
+Position-controller setup:
+
+```python
+bus.read_fast_frame_frequency(device_id)
+bus.write_fast_frame_frequency(device_id, value)
+bus.read_gear_ratio(device_id)
+bus.write_gear_ratio(device_id, value)
+bus.read_position_kp(device_id)
+bus.write_position_kp(device_id, value)
+bus.read_position_kd(device_id)
+bus.write_position_kd(device_id, value)
+bus.read_position_ki(device_id)
+bus.write_position_ki(device_id, value)
+bus.read_velocity_kp(device_id)
+bus.write_velocity_kp(device_id, value)
+bus.read_velocity_ki(device_id)
+bus.write_velocity_ki(device_id, value)
+bus.read_torque_limit(device_id)
+bus.write_torque_limit(device_id, value)
+bus.read_velocity_limit(device_id)
+bus.write_velocity_limit(device_id, value)
+bus.read_position_limit_lower(device_id)
+bus.write_position_limit_lower(device_id, value)
+bus.read_position_limit_upper(device_id)
+bus.write_position_limit_upper(device_id, value)
+bus.read_position_offset(device_id)
+bus.write_position_offset(device_id, value)
+bus.read_torque_filter_alpha(device_id)
+bus.write_torque_filter_alpha(device_id, value)
+```
+
+Runtime targets and feedback:
+
+```python
+bus.read_torque_target(device_id)
+bus.write_torque_target(device_id, value)
+bus.read_torque_measured(device_id)
+bus.read_velocity_target(device_id)
+bus.write_velocity_target(device_id, value)
+bus.read_velocity_measured(device_id)
+bus.read_position_target(device_id)
+bus.write_position_target(device_id, value)
+bus.read_position_measured(device_id)
+bus.transmit_pdo_2(device_id, position_target, velocity_target)
+bus.receive_pdo_2(device_id)
+bus.write_read_pdo_2(device_id, position_target, velocity_target)
+```
+
+Current, motor, and encoder configuration:
+
+```python
+bus.read_current_limit(device_id)
+bus.write_current_limit(device_id, value)
+bus.read_current_kp(device_id)
+bus.write_current_kp(device_id, value)
+bus.read_current_ki(device_id)
+bus.write_current_ki(device_id, value)
+bus.read_bus_voltage_filter_alpha(device_id)
+bus.write_bus_voltage_filter_alpha(device_id, value)
+bus.read_motor_pole_pairs(device_id)
+bus.write_motor_pole_pairs(device_id, value)
+bus.read_motor_torque_constant(device_id)
+bus.write_motor_torque_constant(device_id, value)
+bus.read_motor_phase_order(device_id)
+bus.write_motor_phase_order(device_id, value)
+bus.read_motor_calibration_current(device_id)
+bus.write_motor_calibration_current(device_id, value)
+bus.read_encoder_cpr(device_id)
+bus.write_encoder_cpr(device_id, value)
+bus.read_encoder_position_offset(device_id)
+bus.write_encoder_position_offset(device_id, value)
+bus.read_encoder_velocity_filter_alpha(device_id)
+bus.write_encoder_velocity_filter_alpha(device_id, value)
+bus.read_encoder_flux_offset(device_id)
+bus.write_encoder_flux_offset(device_id, value)
+```
+
+Bandwidth helper functions:
+
+```python
+bus.set_current_bandwidth(device_id, bandwidth_hz, phase_resistance, phase_inductance)
+bus.set_torque_bandwidth(device_id, bandwidth_hz, position_loop_rate=2000)
+bus.set_bus_voltage_bandwidth(device_id, bandwidth_hz, bus_voltage_update_rate=10000)
+bus.set_encoder_velocity_bandwidth(device_id, bandwidth_hz, encoder_update_rate=10000)
+```
+
+Generic private parameter helpers:
+
+```python
+bus._read_parameter(device_id, param_id, timeout=None)
+bus._write_parameter(device_id, param_id, tx_data)
+bus._read_parameter_bytes(device_id, param_id, timeout=None)
+bus._read_parameter_f32(device_id, param_id, timeout=None)
+bus._read_parameter_i32(device_id, param_id, timeout=None)
+bus._read_parameter_u32(device_id, param_id, timeout=None)
+bus._write_parameter_bytes(device_id, param_id, value)
+bus._write_parameter_f32(device_id, param_id, value)
+bus._write_parameter_i32(device_id, param_id, value)
+bus._write_parameter_u32(device_id, param_id, value)
+```
+
+These private helpers are okay to read while learning. For real robot scripts,
+prefer named public helpers unless we intentionally need a missing firmware
+parameter.
+
+### Fixed16 Helper
+
+The package includes `recoil.Fixed16`, a small fixed-point helper in
+`fixed16.py`.
+
+It represents a Q8.8 signed number:
+
+```text
+8 bits integer
+8 bits fractional
+range about -128.0 to 127.9
+resolution 1 / 256
+```
+
+Functions:
+
+```python
+x = recoil.Fixed16(1.5)
+x.asFloat()
+x.asBytes()
+recoil.Fixed16.fromBytes(data)
+recoil.Fixed16.fromInt(value)
+```
+
+Current position-control code does not need `Fixed16`; the PDO 2 path uses
+32-bit floats through `struct.pack("<ff", position_target, velocity_target)`.
+Keep `Fixed16` in mind only if you later inspect older protocol messages or
+firmware utilities that pack fixed-point values.
+
 ## C++ API
 
 The C++ side contains two important classes: `SocketCan` and
