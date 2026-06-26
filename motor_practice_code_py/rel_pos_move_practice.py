@@ -21,12 +21,12 @@ torque_limit = 0.4
 move_time = 5.0
 
 
-def ping_for_response(motor_id, can_channel):
-    is_online = ping_motor(motor_id, can_channel)
+def ping_for_response(bus, motor_id):
+    is_online = ping_motor(bus, motor_id)
     if is_online:
-        print(f"{motor_id} is online at {can_channel}")
+        print(f"{motor_id} is online")
     else:
-        print(f"{motor_id} is offline at {can_channel}")
+        print(f"{motor_id} is offline")
         raise RuntimeError(
             f"no response from {motor_id} within {timeout_threshold}")
 
@@ -75,7 +75,7 @@ def main() -> None:
 
     bus = recoil.Bus(channel=can_channel, bitrate=1000000)
     try:
-        ping_for_response(motor_id, can_channel)
+        ping_for_response(bus, motor_id)
         read_current_raw_position(bus, motor_id)
 
         bus.write_position_kp(motor_id, kp)

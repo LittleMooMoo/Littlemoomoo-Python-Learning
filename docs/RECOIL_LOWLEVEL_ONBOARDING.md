@@ -289,9 +289,101 @@ In our whole-robot code, we usually use `transmit_pdo_2()` instead of
 `write_read_pdo_2()` because reading every motor immediately can slow down the
 control loop. We do tracking checks separately.
 
+### Timing A Control Loop: `time` And `RateLimiter`
+
+A motor-control loop needs two different timing jobs:
+
+1. Measure real elapsed time for a trajectory, timeout, or test duration.
+2. Run each command cycle at a chosen, approximately constant rate.
+
+The standard-library `time` module is for the first job. The two functions we
+use most are:
+
+| Function | Meaning | Motor-control use |
+| --- | --- | --- |
+| `time.perf_counter()` | A high-resolution, steadily increasing clock in seconds. | Measure elapsed motion time and communication timeouts. |
+| `time.sleep(seconds)` | Ask the operating system to pause this thread for at least approximately that long. | Short one-off waits after changing mode, or retry delays. |
+
+Use `perf_counter()` for durations because it is monotonic: changing the system
+clock does not make a trajectory jump forward or backward.
+
+```python
+start_time = time.perf_counter()
+
+while True:
+    elapsed_time = time.perf_counter() - start_time
+    if elapsed_time >= move_duration:
+        break
+```
+
+Do not calculate a trajectory with loop count alone. A computer can be busy
+for one cycle, so one loop iteration is not guaranteed to equal 0.01 seconds.
+Real elapsed time keeps the move duration meaningful.
+
+For the second job, use `loop-rate-limiters` in a repeated control loop:
+
+```python
+from loop_rate_limiters import RateLimiter
+
+rate_hz = 200.0
+rate = RateLimiter(frequency=rate_hz)
+
+while True:
+    # Read feedback, compute one command, then transmit it.
+    bus.feed(device_id)
+    bus.transmit_pdo_2(device_id, command_position, 0.0)
+    rate.sleep()
+```
+
+At `200 Hz`, the desired loop period is `1 / 200 = 0.005` seconds. Calling
+`rate.sleep()` at the end lets the library sleep only for the unused part of
+that 5 ms cycle. If calculations or CAN traffic take 3 ms, it sleeps about
+2 ms. If they take longer than 5 ms, it cannot make time go backward; it skips
+the sleep and can warn that the loop was late.
+
+`RateLimiter` itself is built on `time.perf_counter()` and `time.sleep()`.
+Therefore it is not an alternative to all uses of `time`; it is a cleaner
+alternative to manually writing `time.sleep(0.01)` at the end of every loop.
+
+Use both together for a smooth timed move:
+
+```python
+import math
+import time
+from loop_rate_limiters import RateLimiter
+
+rate = RateLimiter(frequency=100.0)
+start_position = read_current_raw_position(bus, device_id)
+target_position = start_position + delta_raw
+start_time = time.perf_counter()
+
+while True:
+    elapsed = time.perf_counter() - start_time
+    phase = min(elapsed / move_duration, 1.0)
+    blend = 0.5 * (1.0 - math.cos(math.pi * phase))
+    command_position = start_position + (target_position - start_position) * blend
+
+    bus.feed(device_id)
+    bus.transmit_pdo_2(device_id, command_position, 0.0)
+
+    if phase >= 1.0:
+        break
+    rate.sleep()
+```
+
+The trajectory ends when real time reaches `move_duration`; `RateLimiter`
+simply controls how often we send its intermediate commands. Afterward, create
+a second `while True` loop with the same `rate.sleep()` if you want to keep
+holding `target_position` until `Ctrl+C`.
+
+For a first single-motor test, choose a modest rate such as `100 Hz`, a very
+small position delta, and conservative gains and torque limits approved for
+the specific actuator. A rate limiter cannot make an unsafe target safe.
+
 ### Command-Line Helper
 
-The local Recoil wrapper also exposes a small `argparse` helper:
+The local Recoil Python wrapper (not the motor firmware itself) also exposes a
+small `argparse` helper:
 
 ```python
 args = recoil.get_args()
@@ -324,6 +416,19 @@ python ping_motor.py -c can1 -i 3
 If your script needs extra options such as `--delta_raw`, `--move_time`,
 `--kp`, `--kd`, or `--torque_limit`, write your own `argparse` function instead
 of using `recoil.get_args()`.
+
+`recoil.get_args()` works because `recoil/__init__.py` imports names from
+`util.py`, so both of these spellings work with the local wrapper:
+
+```python
+args = recoil.get_args()
+# or
+args = recoil.util.get_args()
+```
+
+The helper does not provide `get.args_util()` and it does not include movement
+arguments. Think of it as a tiny convenience function, not a replacement for
+your own parser.
 
 ### Raw Frame And Debug Helpers
 
