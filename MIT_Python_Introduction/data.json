@@ -1,0 +1,28 @@
+{
+  "course_title":"A Gentle Introduction to Programming Using Python",
+  "course_description":"This course will provide a gentle introduction to programming using Python™ for highly motivated students with little or no prior experience in programming computers. The course will focus on planning and organizing programs, as well as the grammar of the Python programming language. Lectures will be interactive featuring in-class exercises with lots of support from the course staff.\n\nThis course is offered during the Independent Activities Period (IAP), which is a special 4-week term at MIT that runs from the first week of January until the end of the month.\n",
+  "course_description_html":"<p>This course will provide a gentle introduction to programming using Python™ for highly motivated students with little or no prior experience in programming computers. The course will focus on planning and organizing programs, as well as the grammar of the Python programming language. Lectures will be interactive featuring in-class exercises with lots of support from the course staff.</p>\n<p>This course is offered during the Independent Activities Period (IAP), which is a special 4-week term at MIT that runs from the first week of January until the end of the month.</p>\n",
+  "site_uid":"1ebe14d5-7799-4438-abaf-bc932da3ce5c",
+  "legacy_uid":"caedc8a4-4577-0cdb-4d65-50366064de06","instructors": [{
+    "first_name":"Mihir",
+    "last_name":"Kedia",
+    "middle_initial":"",
+    "salutation":"",
+    "title":"Mihir Kedia"},{
+    "first_name":"Aseem",
+    "last_name":"Kishore",
+    "middle_initial":"",
+    "salutation":"",
+    "title":"Aseem Kishore"}],"department_numbers":["6"],
+  "learning_resource_types":["Lecture Notes","Projects","Programming Assignments with Examples","Problem Sets","Problem Set Solutions"],
+  "topics":[["Engineering","Computer Science","Programming Languages"],["Engineering","Computer Science","Software Design and Engineering"]],
+  "mit_learn_topics":null,
+  "primary_course_number":"6.189",
+  "extra_course_numbers":"",
+  "term":"January IAP",
+  "year":"2008",
+  "level":["Undergraduate"],
+  "hide_download":null,
+  "image_src":"./static_resources/73030cb65d77bdb10ff82c37232f55d0_6-189iap08.jpg",
+  "course_image_metadata":{"content_type":"resource","description":"\"I wrote 20 short programs in Python? yesterday. It was wonderful. Perl, I'm leaving you.\" (Courtesy of Randall Munroe, creator of the xkcd webcomic; this particular image can be found here.","draft":false,"file":"/courses/6-189-a-gentle-introduction-to-programming-using-python-january-iap-2008/73030cb65d77bdb10ff82c37232f55d0_6-189iap08.jpg","file_size":46193,"file_type":"image/jpeg","image_metadata":{"caption":"\"I wrote 20 short programs in Python yesterday. It was wonderful. Perl, I'm leaving you.\" (Image courtesy of Randall Munroe, creator of the {{% resource_link \"de55e5b5-fdb7-4c57-bc9e-8ec8f415c961\" \"xkcd\" %}} webcomic; this particular image can be found {{% resource_link \"652c49ab-834f-481d-806c-f54702ca1d72\" \"here\" %}}.)","credit":"","image-alt":"Comic strip showing how easy it is to do anything in Python, even fly."},"iscjklanguage":false,"learning_resource_types":[],"license":"https://creativecommons.org/licenses/by-nc-sa/4.0/","ocw_type":"OCWImage","resourcetype":"Image","title":"6-189iap08.jpg","uid":"73030cb6-5d77-bdb1-0ff8-2c37232f55d0","video_files":{"video_thumbnail_file":null},"video_metadata":{"youtube_id":null}}}
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lecture Notes on MIT OpenCourseWare</title>
+    <link>/resources/lecture-notes/</link>
+    <description>Recent content in Lecture Notes on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/lecture-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>handout1.pdf</title>
+      <link>/resources/handout1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/handout1/data.json</guid>
+      <description>&lt;p&gt;Lecture handout with a review of while loops and the basics of for loops.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>handout2.pdf</title>
+      <link>/resources/handout2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/handout2/data.json</guid>
+      <description>&lt;p&gt;Lecture handout with a review for the midterm, covering functions, lists, for loops and tuples.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>handout3.pdf</title>
+      <link>/resources/handout3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/handout3/data.json</guid>
+      <description>&lt;p&gt;Lecture handout on objects, aliasing, and scope.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>handout4.pdf</title>
+      <link>/resources/handout4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/handout4/data.json</guid>
+      <description>&lt;p&gt;Lecture handout on dictionaries and the Web Indexer lab.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>handout5.pdf</title>
+      <link>/resources/handout5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/handout5/data.json</guid>
+      <description>&lt;p&gt;Lecture handout with a walk through for part 2 of the Web indexer lab.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Lecture Notes</title>
+      <link>/pages/lecture-notes/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/pages/lecture-notes/data.json</guid>
+      <description>&lt;h3 id=&#34;notes-and-worksheets&#34;&gt;Notes and Worksheets&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;The session 1 notes (&lt;a href=&#34;../../resources/notes1/index.html&#34;&gt;PDF&lt;/a&gt;) include the syllabus, some administrivia and an introductory tutorial to Python.&lt;/p&gt;&#xA;&lt;p&gt;Exam 1 (Session 5) covered everything through class 3: variables, types, operators, functions, conditionals and loops. The solutions double as notes for sessions 1 through 3. (&lt;a href=&#34;../../resources/exam1_soln/index.html&#34;&gt;PDF&lt;/a&gt;)&lt;/p&gt;&#xA;&lt;p&gt;The session 6 homework (&lt;a href=&#34;../../resources/notes6/index.html&#34;&gt;PDF&lt;/a&gt;) doubles as notes for classes 4 through 6.&lt;/p&gt;&#xA;&lt;p&gt;The optional session 7 homework (&lt;a href=&#34;../../resources/notes7/index.html&#34;&gt;PDF&lt;/a&gt;) serves as useful practice with lists.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>notes1.pdf</title>
+      <link>/resources/notes1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/notes1/data.json</guid>
+      <description>&lt;p&gt;Lecture notes containing the syllabus, some administrative information, and an introductory tutorial to Python.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>notes6.pdf</title>
+      <link>/resources/notes6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/notes6/data.json</guid>
+      <description>&lt;p&gt;Lecture notes and homework assignment from Session 6.  Topics include list basics, objects and references, mutability, member functions, lists redux, advanced positioning and slicing, range function, for loop, and basic advanced loops.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>notes7.pdf</title>
+      <link>/resources/notes7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/notes7/data.json</guid>
+      <description>&lt;p&gt;Optional homework assignment on loops.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>notes8.pdf</title>
+      <link>/resources/notes8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/notes8/data.json</guid>
+      <description>&lt;p&gt;Lecture notes about dictionaries and their usage, immutable objects, tuples, and for loops.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>notes9.pdf</title>
+      <link>/resources/notes9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/notes9/data.json</guid>
+      <description>&lt;p&gt;Worksheet from Session 9 reviewing common errors and good programming practices.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

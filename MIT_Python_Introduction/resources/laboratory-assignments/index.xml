@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Laboratory Assignments on MIT OpenCourseWare</title>
+    <link>/resources/laboratory-assignments/</link>
+    <description>Recent content in Laboratory Assignments on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/laboratory-assignments/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>collision.py</title>
+      <link>/resources/collision/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/collision/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 6.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>genetic.py</title>
+      <link>/resources/genetic/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/genetic/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 8.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>htmltext.py</title>
+      <link>/resources/htmltext/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/htmltext/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>inventory_soln.py</title>
+      <link>/resources/inventory_soln/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/inventory_soln/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>inventory.py</title>
+      <link>/resources/inventory/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/inventory/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab10.pdf</title>
+      <link>/resources/lab10/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab10/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 10: Compound Dictionaries. Lab 10 covered a more advanced use of dictionaries. The bulk of the lab was to improve the web indexer we built in the previous lab.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab3.pdf</title>
+      <link>/resources/lab3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab3/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 3: Control Flow with If-Else-Elif. Lab 3 covered control flow with if-elif-else statements.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab4.pdf</title>
+      <link>/resources/lab4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab4/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 4: Control Flow with While. Lab 4 covered control flow with while statements.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab5.pdf</title>
+      <link>/resources/lab5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab5/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 5: Working with Lists. Lab 5 covered the use of lists in storing a dynamic number of values.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab6.pdf</title>
+      <link>/resources/lab6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab6/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 6: Tuples and Strings. Lab 6 covered the use of tuples instead of lists and their similarity with strings.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab7.pdf</title>
+      <link>/resources/lab7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab7/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 7: Introduction to Objects. Lab 7 was a walk through tutorial that introduced the idea of objects as opposed to primitive types like ints and floats.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab8.pdf</title>
+      <link>/resources/lab8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab8/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 8: Working with Objects. Lab 8 covered the use of member functions in various objects.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>lab9.pdf</title>
+      <link>/resources/lab9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/lab9/data.json</guid>
+      <description>&lt;p&gt;Instructions for Lab 9: Introduction to Dictionaries. Lab 9 covered the use and syntax of dictionaries. The bulk of the lab was to explore one common use of dictionaries as indexes, in this case, for searching the Web.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>localsites.zip</title>
+      <link>/resources/localsites/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/localsites/data.json</guid>
+      <description>&lt;p&gt;Archive of web content for use with Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>login.py</title>
+      <link>/resources/login/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/login/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mitsites20.txt</title>
+      <link>/resources/mitsites20/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mitsites20/data.json</guid>
+      <description>&lt;p&gt;Text file containing a list of 20 websites provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>mitsites50.txt</title>
+      <link>/resources/mitsites50/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mitsites50/data.json</guid>
+      <description>&lt;p&gt;Text file containing a list of 50 websites provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>namesages_soln.py</title>
+      <link>/resources/namesages_soln/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/namesages_soln/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>namesages.py</title>
+      <link>/resources/namesages/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/namesages/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nims1.py</title>
+      <link>/resources/nims1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/nims1/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>nims2.py</title>
+      <link>/resources/nims2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/nims2/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>piglatin.py</title>
+      <link>/resources/piglatin/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/piglatin/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 6.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>reportcard.py</title>
+      <link>/resources/reportcard/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/reportcard/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 5.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>smallsites.txt</title>
+      <link>/resources/smallsites/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/smallsites/data.json</guid>
+      <description>&lt;p&gt;Text file containing a list of websites provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>sorting.py</title>
+      <link>/resources/sorting/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/sorting/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 5.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>webindexer1_soln.py</title>
+      <link>/resources/webindexer1_soln/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/webindexer1_soln/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>webindexer1.py</title>
+      <link>/resources/webindexer1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/webindexer1/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>webindexer2_soln.py</title>
+      <link>/resources/webindexer2_soln/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/webindexer2_soln/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a solution to Lab 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>webindexer2.py</title>
+      <link>/resources/webindexer2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/webindexer2/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>websearch1.py</title>
+      <link>/resources/websearch1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/websearch1/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 9.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>websearch2.py</title>
+      <link>/resources/websearch2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/websearch2/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Lab 10.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

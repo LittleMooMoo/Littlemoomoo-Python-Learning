@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on MIT OpenCourseWare</title>
+    <link>/resources/projects/</link>
+    <description>Recent content in Projects on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/projects/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>connectfour.py</title>
+      <link>/resources/connectfour/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/connectfour/data.json</guid>
+      <description>&lt;p&gt;Sample program written in Python to demonstrate a non-trivial implementation where abstraction is vital to prevent bugs and to keep the code readable.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>hangman_lib.py</title>
+      <link>/resources/hangman_lib/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/hangman_lib/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Project 1 contains helper functions to get a random word and to print a Hangman image.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>hangman_soln.py</title>
+      <link>/resources/hangman_soln/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/hangman_soln/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as an example solution to Project 1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>hangman.py</title>
+      <link>/resources/hangman/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/hangman/data.json</guid>
+      <description>&lt;p&gt;Python computer program provided as a supporting file to Project 1 contains example usage of hangman_lib.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>project1.pdf</title>
+      <link>/resources/project1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/project1/data.json</guid>
+      <description>&lt;p&gt;Instructions for completing Project 1: Hangman.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Projects</title>
+      <link>/pages/projects/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/pages/projects/data.json</guid>
+      <description>&lt;h3 id=&#34;project-1--hangman&#34;&gt;Project 1 – Hangman&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Project 1 (&lt;a href=&#34;../../resources/project1/index.html&#34;&gt;PDF&lt;/a&gt;) was the game of Hangman. The handout guides you through the process. This process is called &lt;em&gt;incremental programming&lt;/em&gt;. It allows you to tackle complex problems, like writing a game of Hangman, by tackling small sub-tasks first. In this case, we can tackle the problems of figuring out whether the user has guessed the word, or creating a string of the word with the letters guessed so far. With the sub-tasks taken care of, it&amp;rsquo;s easier to take on the bigger task.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>tictactoe.py</title>
+      <link>/resources/tictactoe/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/tictactoe/data.json</guid>
+      <description>&lt;p&gt;Sample program written in Python to demonstrate a polished implementation.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>word_list.txt</title>
+      <link>/resources/word_list/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/word_list/data.json</guid>
+      <description>&lt;p&gt;A list of words provided as a supplement to Project 1.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
