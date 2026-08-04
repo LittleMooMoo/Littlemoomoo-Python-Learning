@@ -70,7 +70,7 @@ import matplotlib.pyplot as plt
 # meow1 = torch.argmax(moo)
 # print(meow1)
 
-moo = torch.tensor([[1, 2, 7], [3, 21, 8], [32, 9, 8]], dtype=torch.float32)
+moo = torch.tensor([[1], [3], [32]], dtype=torch.float32)
 
 r = torch.tensor([[2, 2, 1], [2, 1, 1], [5, 5, 8]])
 
@@ -82,5 +82,14 @@ r = torch.tensor([[2, 2, 1], [2, 1, 1], [5, 5, 8]])
 
 # print(z)
 # print(r)
-z = torch.stack([moo, r])
-print(z)
+# z = torch.stack([moo, r], dim=2)
+# print(z[0, 0, 0])  # first page, first row, first column
+
+y = torch.squeeze(moo)
+
+z = y.unsqueeze(dim=1)
+
+w = z.permute(1, 0)
+
+print(w)
+print(w.shape)
