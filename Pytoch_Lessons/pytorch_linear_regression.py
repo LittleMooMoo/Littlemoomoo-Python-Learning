@@ -42,7 +42,7 @@ MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
 X = torch.arange(start, end, step).unsqueeze(dim=1).to(device="cuda")
 
 # These are the correct labels generated from parameters that we already know.
-y = (weight * X + bias).to(device="cuda")
+y = (weight * X * X + bias).to(device="cuda")
 
 # Use the first 80% of the samples for learning and the remaining 20% for
 # checking how the learned model behaves on data it did not train on.
@@ -143,7 +143,7 @@ optimizer = torch.optim.SGD(params=model_0.parameters(),
                             lr=0.1)  # Learning rate scales each update.
 
 # One epoch is one complete pass through X_train in this full-batch example.
-epochs = 2000
+epochs = 1000
 
 epoch_history = []
 test_loss_history = []
