@@ -16,6 +16,8 @@ public:
     float getState();
     motor::mode getmode();
 
+    motor::state get_motor_state();
+
 private:
     state motor_state_;
     mode mode_;
