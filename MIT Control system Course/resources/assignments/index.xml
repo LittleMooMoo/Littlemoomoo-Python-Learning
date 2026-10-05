@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Assignments on MIT OpenCourseWare</title>
+    <link>/resources/assignments/</link>
+    <description>Recent content in Assignments on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/assignments/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Assignments</title>
+      <link>/pages/assignments/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/pages/assignments/data.json</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;../../resources/mit2_04as13_problemset1/index.html&#34;&gt;Problem Set 1 (PDF)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;../../resources/mit2_04as13_problemset2/index.html&#34;&gt;Problem Set 2 (PDF)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;../../resources/mit2_04as13_problemset3/index.html&#34;&gt;Problem Set 3 (PDF)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;../../resources/mit2_04as13_problemset4/index.html&#34;&gt;Problem Set 4 (PDF)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;    &lt;h3 id=&#34;problem-set-grading&#34;&gt;Problem Set Grading&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Each problem receives a maximum of 3 points:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3 points if solved correctly&lt;/li&gt;&#xA;&lt;li&gt;2 points if solved with minor errors&lt;/li&gt;&#xA;&lt;li&gt;1 point if the solution indicates a major misunderstanding of the material&lt;/li&gt;&#xA;&lt;li&gt;0 points for no attempt&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

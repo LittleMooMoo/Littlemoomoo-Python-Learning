@@ -1,0 +1,16 @@
+
+{
+  "content": "<p><table>\n\n<thead>\n\n<tr>\n\n<th>\n\nQUIZZES\n</th>\n\n<th>\n\nPRACTICE PROBLEMS (WITH SOLUTIONS)\n</th>\n</p>\n</tr>\n\n<p></thead>\n\n<tr>\n\n<td>\n\n<a href=\"../../resources/mit2_04as13_quiz1/index.html\">Quiz 1 (PDF)</a>\n</td>\n\n<td>\n\n<a href=\"../../resources/mit2_04as13_practproblem1/index.html\">Practice Problems 1 (PDF)</a>\n</td>\n</p>\n<p></tr>\n\n<tr>\n\n<td>\n\nQuiz 2 (Not available)\n</td>\n\n<td>\n\n<a href=\"../../resources/mit2_04as13_practproblem2/index.html\">Practice Problems 2 (PDF)</a>\n</td>\n</p>\n</tr>\n\n</table>\n\n\n    <h3 id=\"quiz-grading\"> Quiz Grading</h3>\n\n<p>Quiz grading will be concept-based. That is, we evaluate your grasp of the concepts contained within each problem statement. This prevents you from losing points due to &ldquo;cascade of errors,&rdquo; and allows us to track the understanding of the concepts by the class.</p>\n<ul>\n<li>3 points for demonstrating perfect grasp of the concept</li>\n<li>2 points if you addressed the concept adequately but made small mistakes in its application</li>\n<li>1 point if you addressed the concept but incompletely or indicate a major misunderstanding</li>\n<li>0 points if you don&rsquo;t address the concept</li>\n</ul>\n<p>The total score in each problem is then weighted to produce the quiz grade.</p>\n",
+  "content_type": "page",
+  "description": "This section provides the first quiz of the course, practice problems for quizzes, and information on quiz grading.",
+  "draft": false,
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Exams"
+  ],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "CourseSection",
+  "title": "Exams",
+  "uid": "a1ad574c-b046-7665-942f-58472e8ae01f"
+}
+

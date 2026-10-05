@@ -1,0 +1,16 @@
+
+{
+  "content": "<ul>\n<li><a href=\"../../resources/mit2_04as13_problemset1/index.html\">Problem Set 1 (PDF)</a></li>\n<li><a href=\"../../resources/mit2_04as13_problemset2/index.html\">Problem Set 2 (PDF)</a></li>\n<li><a href=\"../../resources/mit2_04as13_problemset3/index.html\">Problem Set 3 (PDF)</a></li>\n<li><a href=\"../../resources/mit2_04as13_problemset4/index.html\">Problem Set 4 (PDF)</a></li>\n</ul>\n\n    <h3 id=\"problem-set-grading\">Problem Set Grading</h3>\n\n<p>Each problem receives a maximum of 3 points:</p>\n<ul>\n<li>3 points if solved correctly</li>\n<li>2 points if solved with minor errors</li>\n<li>1 point if the solution indicates a major misunderstanding of the material</li>\n<li>0 points for no attempt</li>\n</ul>\n",
+  "content_type": "page",
+  "description": "This section provides the four problem sets assigned for the course and information on problem set grading.",
+  "draft": false,
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Assignments"
+  ],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "CourseSection",
+  "title": "Assignments",
+  "uid": "cc3b036f-f8a8-eb54-35bb-e847a05325c5"
+}
+

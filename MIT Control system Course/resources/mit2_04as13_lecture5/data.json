@@ -1,0 +1,49 @@
+{
+  "audience": [],
+  "content": "<p>This file contains information regarding lecture 5.</p>\n",
+  "content_type": "resource",
+  "description": "This file contains information regarding lecture 5.",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/49dbfe8aa77e9df567e848bc4a7721a5_MIT2_04AS13_Lecture5.pdf",
+  "file_size": 1076865,
+  "file_type": "application/pdf",
+  "image_metadata": {
+    "caption": "",
+    "credit": "",
+    "image-alt": ""
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Lecture Notes"
+  ],
+  "level": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWFile",
+  "parent_title": "Lectures & Labs",
+  "parent_type": "CourseSection",
+  "parent_uid": "48e3d26a-5c3b-a400-486b-434949ef2235",
+  "resourcetype": "Document",
+  "title": "2.04A Lecture Notes – Lecture 5",
+  "uid": "49dbfe8a-a77e-9df5-67e8-48bc4a7721a5",
+  "video_files": {
+    "archive_url": "",
+    "video_captions_file": "",
+    "video_captions_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    },
+    "video_thumbnail_file": "",
+    "video_transcript_file": "",
+    "video_transcript_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    }
+  },
+  "video_metadata": {
+    "source": "",
+    "video_speakers": "",
+    "video_tags": "",
+    "youtube_description": "",
+    "youtube_id": ""
+  }
+}

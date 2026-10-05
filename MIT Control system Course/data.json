@@ -1,0 +1,78 @@
+{
+  "course_description": "This course provides an introduction to linear systems, transfer functions, and Laplace transforms. It covers stability and feedback, and provides basic design tools for specifications of transient response. It also briefly covers frequency-domain techniques.\n",
+  "course_description_html": "This course provides an introduction to linear systems, transfer functions, and Laplace transforms. It covers stability and feedback, and provides basic design tools for specifications of transient response. It also briefly covers frequency-domain techniques.",
+  "course_image": {
+    "content": "c06619c4-3540-fbbb-b938-e4f826362fc1",
+    "website": "2-04a-systems-and-controls-spring-2013"
+  },
+  "course_image_metadata": {
+    "content_type": "resource",
+    "description": "Taipei 101 was the world's tallest building from 2004 until 2010. Between floors 87 and 92 is a 660 ton steel pendulum. The pendulum serves as a tuned mass damper; it sways to offset movement of the building by strong gusts of winds. Courtesy of Jirka Matousek on flickr. CC-BY.",
+    "draft": false,
+    "file": "/courses/2-04a-systems-and-controls-spring-2013/c06619c43540fbbbb938e4f826362fc1_2-04As13.jpg",
+    "file_size": 35085,
+    "file_type": "image/jpeg",
+    "image_metadata": {
+      "caption": "Taipei 101 was the world's tallest building from 2004 until 2010. Between floors 87 and 92 is a 660 ton steel pendulum. The pendulum serves as a tuned mass damper; it sways to offset movement of the building by strong gusts of winds. (Courtesy of {{% resource_link \"034e388e-60a6-47aa-be19-6ad49dc6c264\" \"Jirka Matousek\" %}} on flickr. CC-BY.)",
+      "credit": "Courtesy of Jirka Matousek on flickr. CC-BY.",
+      "image-alt": "A photograph of Taipei 101, a skyscraper in Taipei, Taiwan."
+    },
+    "iscjklanguage": false,
+    "learning_resource_types": [],
+    "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "ocw_type": "OCWImage",
+    "resourcetype": "Image",
+    "title": "2-04As13.jpg",
+    "uid": "c06619c4-3540-fbbb-b938-e4f826362fc1"
+  },
+  "course_image_thumbnail": {
+    "content": "32f95c73-7710-f240-d7d8-b73b666dac77",
+    "website": "2-04a-systems-and-controls-spring-2013"
+  },
+  "course_title": "Systems and Controls",
+  "department_numbers": [
+    "2"
+  ],
+  "extra_course_numbers": "",
+  "image_src": "./static_resources/c06619c43540fbbbb938e4f826362fc1_2-04As13.jpg",
+  "instructors": [
+    {
+      "first_name": "George",
+      "last_name": "Barbastathis",
+      "middle_initial": "",
+      "salutation": "Prof.",
+      "title": "Prof. George Barbastathis",
+      "uid": "a0059bf4-2f78-b8d5-ba9c-c83f448f3e0c",
+      "url": "https://ocw.mit.edu/search/?q=Prof.+George+Barbastathis"
+    }
+  ],
+  "learning_resource_types": [
+    "Lecture Notes",
+    "Problem Sets",
+    "Exams"
+  ],
+  "legacy_uid": "18de7a64-f64d-af12-d374-63cf9eb3c015",
+  "level": [
+    "Undergraduate"
+  ],
+  "mit_learn_topics": [
+    [
+      "Engineering",
+      "Mechanical Engineering"
+    ]
+  ],
+  "primary_course_number": "2.04A",
+  "site_short_id": "2.04a-spring-2013",
+  "site_uid": "a36b954d-7d1c-4d65-8a6b-6431b570b4d6",
+  "site_url_path": "courses/2-04a-systems-and-controls-spring-2013",
+  "term": "Spring",
+  "title": "Course Metadata",
+  "topics": [
+    [
+      "Engineering",
+      "Mechanical Engineering",
+      "Dynamics and Control"
+    ]
+  ],
+  "year": "2013"
+}

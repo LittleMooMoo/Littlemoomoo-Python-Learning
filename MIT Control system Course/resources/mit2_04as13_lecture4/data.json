@@ -1,0 +1,49 @@
+{
+  "audience": [],
+  "content": "<p>This file contains information regarding lecture 4.</p>\n",
+  "content_type": "resource",
+  "description": "This file contains information regarding lecture 4.",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/9bb1ead79075764dff205944e9623a6a_MIT2_04AS13_Lecture4.pdf",
+  "file_size": 723075,
+  "file_type": "application/pdf",
+  "image_metadata": {
+    "caption": "",
+    "credit": "",
+    "image-alt": ""
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Lecture Notes"
+  ],
+  "level": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWFile",
+  "parent_title": "Lectures & Labs",
+  "parent_type": "CourseSection",
+  "parent_uid": "48e3d26a-5c3b-a400-486b-434949ef2235",
+  "resourcetype": "Document",
+  "title": "2.04A Lecture Notes – Lecture 4",
+  "uid": "9bb1ead7-9075-764d-ff20-5944e9623a6a",
+  "video_files": {
+    "archive_url": "",
+    "video_captions_file": "",
+    "video_captions_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    },
+    "video_thumbnail_file": "",
+    "video_transcript_file": "",
+    "video_transcript_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    }
+  },
+  "video_metadata": {
+    "source": "",
+    "video_speakers": "",
+    "video_tags": "",
+    "youtube_description": "",
+    "youtube_id": ""
+  }
+}

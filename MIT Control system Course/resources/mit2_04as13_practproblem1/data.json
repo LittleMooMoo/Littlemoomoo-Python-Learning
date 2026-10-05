@@ -1,0 +1,49 @@
+{
+  "audience": [],
+  "content": "<p>This file contains information regarding practice problem 1.</p>\n",
+  "content_type": "resource",
+  "description": "This file contains information regarding practice problem 1.",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/5242292aca7e37ed3a5310369186f971_MIT2_04AS13_PractProblem1.pdf",
+  "file_size": 552521,
+  "file_type": "application/pdf",
+  "image_metadata": {
+    "caption": "",
+    "credit": "",
+    "image-alt": ""
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Supplemental Exam Materials"
+  ],
+  "level": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWFile",
+  "parent_title": "Exams",
+  "parent_type": "CourseSection",
+  "parent_uid": "a1ad574c-b046-7665-942f-58472e8ae01f",
+  "resourcetype": "Document",
+  "title": "2.04A Systems and Controls,  Practice Problem 1",
+  "uid": "5242292a-ca7e-37ed-3a53-10369186f971",
+  "video_files": {
+    "archive_url": "",
+    "video_captions_file": "",
+    "video_captions_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    },
+    "video_thumbnail_file": "",
+    "video_transcript_file": "",
+    "video_transcript_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    }
+  },
+  "video_metadata": {
+    "source": "",
+    "video_speakers": "",
+    "video_tags": "",
+    "youtube_description": "",
+    "youtube_id": ""
+  }
+}

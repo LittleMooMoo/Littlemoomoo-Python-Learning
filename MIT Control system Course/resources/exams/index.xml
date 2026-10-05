@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Exams on MIT OpenCourseWare</title>
+    <link>/resources/exams/</link>
+    <description>Recent content in Exams on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/exams/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2.04A Systems and Controls, Quiz 1</title>
+      <link>/resources/mit2_04as13_quiz1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_quiz1/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding quiz1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Exams</title>
+      <link>/pages/exams/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/pages/exams/data.json</guid>
+      <description>&lt;p&gt;&lt;table&gt;&#xA;&#xA;&lt;thead&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&#xA;&lt;th&gt;&#xA;&#xA;QUIZZES&#xA;&lt;/th&gt;&#xA;&#xA;&lt;th&gt;&#xA;&#xA;PRACTICE PROBLEMS (WITH SOLUTIONS)&#xA;&lt;/th&gt;&#xA;&lt;/p&gt;&#xA;&lt;/tr&gt;&#xA;&#xA;&lt;p&gt;&lt;/thead&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&#xA;&lt;td&gt;&#xA;&#xA;&lt;a href=&#34;../../resources/mit2_04as13_quiz1/index.html&#34;&gt;Quiz 1 (PDF)&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&#xA;&lt;td&gt;&#xA;&#xA;&lt;a href=&#34;../../resources/mit2_04as13_practproblem1/index.html&#34;&gt;Practice Problems 1 (PDF)&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&lt;/tr&gt;&#xA;&#xA;&lt;tr&gt;&#xA;&#xA;&lt;td&gt;&#xA;&#xA;Quiz 2 (Not available)&#xA;&lt;/td&gt;&#xA;&#xA;&lt;td&gt;&#xA;&#xA;&lt;a href=&#34;../../resources/mit2_04as13_practproblem2/index.html&#34;&gt;Practice Problems 2 (PDF)&lt;/a&gt;&#xA;&lt;/td&gt;&#xA;&lt;/p&gt;&#xA;&lt;/tr&gt;&#xA;&#xA;&lt;/table&gt;&#xA;&#xA;&#xA;    &lt;h3 id=&#34;quiz-grading&#34;&gt; Quiz Grading&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Quiz grading will be concept-based. That is, we evaluate your grasp of the concepts contained within each problem statement. This prevents you from losing points due to &amp;ldquo;cascade of errors,&amp;rdquo; and allows us to track the understanding of the concepts by the class.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;3 points for demonstrating perfect grasp of the concept&lt;/li&gt;&#xA;&lt;li&gt;2 points if you addressed the concept adequately but made small mistakes in its application&lt;/li&gt;&#xA;&lt;li&gt;1 point if you addressed the concept but incompletely or indicate a major misunderstanding&lt;/li&gt;&#xA;&lt;li&gt;0 points if you don&amp;rsquo;t address the concept&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;The total score in each problem is then weighted to produce the quiz grade.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

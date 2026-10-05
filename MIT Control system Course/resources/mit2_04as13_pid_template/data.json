@@ -1,0 +1,49 @@
+{
+  "audience": [],
+  "content": "<p>This is a special file related to matlab template.</p>\n",
+  "content_type": "resource",
+  "description": "This is a special file related to matlab template.\r\n",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/afc613357c77ece9ed4350c6fe281cc3_MIT2_04AS13_PID_template.m",
+  "file_size": 1703,
+  "file_type": "text/x-objcsrc",
+  "image_metadata": {
+    "caption": "",
+    "credit": "",
+    "image-alt": ""
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Laboratory Assignments"
+  ],
+  "level": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWFile",
+  "parent_title": "Lectures & Labs",
+  "parent_type": "CourseSection",
+  "parent_uid": "48e3d26a-5c3b-a400-486b-434949ef2235",
+  "resourcetype": "Other",
+  "title": "MIT2_04AS13_PID_template.m",
+  "uid": "afc61335-7c77-ece9-ed43-50c6fe281cc3",
+  "video_files": {
+    "archive_url": "",
+    "video_captions_file": "",
+    "video_captions_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    },
+    "video_thumbnail_file": "",
+    "video_transcript_file": "",
+    "video_transcript_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    }
+  },
+  "video_metadata": {
+    "source": "",
+    "video_speakers": "",
+    "video_tags": "",
+    "youtube_description": "",
+    "youtube_id": ""
+  }
+}

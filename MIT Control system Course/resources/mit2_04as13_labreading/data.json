@@ -1,0 +1,49 @@
+{
+  "audience": [],
+  "content": "<p>This file contains information regarding lab reading: rotational plant.</p>\n",
+  "content_type": "resource",
+  "description": "This file contains information regarding lab reading: rotational plant.",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/4c15b0fa02de2db68b5962ef66885ab8_MIT2_04AS13_LabReading.pdf",
+  "file_size": 304982,
+  "file_type": "application/pdf",
+  "image_metadata": {
+    "caption": "",
+    "credit": "",
+    "image-alt": ""
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [
+    "Laboratory Assignments"
+  ],
+  "level": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWFile",
+  "parent_title": "Lectures & Labs",
+  "parent_type": "CourseSection",
+  "parent_uid": "48e3d26a-5c3b-a400-486b-434949ef2235",
+  "resourcetype": "Document",
+  "title": "2.04A Lab Reading: Rotational Plant",
+  "uid": "4c15b0fa-02de-2db6-8b59-62ef66885ab8",
+  "video_files": {
+    "archive_url": "",
+    "video_captions_file": "",
+    "video_captions_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    },
+    "video_thumbnail_file": "",
+    "video_transcript_file": "",
+    "video_transcript_resource": {
+      "content": "",
+      "website": "2-04a-systems-and-controls-spring-2013"
+    }
+  },
+  "video_metadata": {
+    "source": "",
+    "video_speakers": "",
+    "video_tags": "",
+    "youtube_description": "",
+    "youtube_id": ""
+  }
+}

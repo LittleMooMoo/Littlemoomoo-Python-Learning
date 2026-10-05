@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Supplemental Exam Materials on MIT OpenCourseWare</title>
+    <link>/resources/supplemental-exam-materials/</link>
+    <description>Recent content in Supplemental Exam Materials on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/supplemental-exam-materials/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2.04A Systems and Controls,  Practice Problem 1</title>
+      <link>/resources/mit2_04as13_practproblem1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_practproblem1/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding practice problem 1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Systems and Controls, Practice Problem 2</title>
+      <link>/resources/mit2_04as13_practproblem2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_practproblem2/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding practice problem 2.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

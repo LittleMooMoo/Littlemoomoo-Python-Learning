@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lecture Notes on MIT OpenCourseWare</title>
+    <link>/resources/lecture-notes/</link>
+    <description>Recent content in Lecture Notes on MIT OpenCourseWare</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="/resources/lecture-notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2.04A Lecture Notes – Lecture 1</title>
+      <link>/resources/mit2_04as13_lecture1/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture1/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 10</title>
+      <link>/resources/mit2_04as13_lecture10/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture10/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 10 Supplement</title>
+      <link>/resources/mit2_04as13_supplecture10/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_supplecture10/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding supplement to lecture 10.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 11</title>
+      <link>/resources/mit2_04as13_lecture11/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture11/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 11.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 12</title>
+      <link>/resources/mit2_04as13_lecture12/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture12/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 12.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 13</title>
+      <link>/resources/mit2_04as13_lecture13/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture13/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 13.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 14</title>
+      <link>/resources/mit2_04as13_lecture14/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture14/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 14.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 16-17</title>
+      <link>/resources/mit2_04as13_lecture16-17/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture16-17/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 16-17.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 18</title>
+      <link>/resources/mit2_04as13_lecture18/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture18/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 18.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 2</title>
+      <link>/resources/mit2_04as13_lecture2/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture2/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 2.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 3</title>
+      <link>/resources/mit2_04as13_lecture3/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture3/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 3.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 4</title>
+      <link>/resources/mit2_04as13_lecture4/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture4/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 4.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 5</title>
+      <link>/resources/mit2_04as13_lecture5/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture5/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 5.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 6</title>
+      <link>/resources/mit2_04as13_lecture6/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture6/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 6.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 7</title>
+      <link>/resources/mit2_04as13_lecture7/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture7/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 7.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 8</title>
+      <link>/resources/mit2_04as13_lecture8/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture8/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 8.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>2.04A Lecture Notes – Lecture 9</title>
+      <link>/resources/mit2_04as13_lecture9/data.json</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/resources/mit2_04as13_lecture9/data.json</guid>
+      <description>&lt;p&gt;This file contains information regarding lecture 9.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

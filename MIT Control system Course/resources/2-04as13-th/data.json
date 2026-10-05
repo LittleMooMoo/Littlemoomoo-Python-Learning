@@ -1,0 +1,21 @@
+{
+  "content": "<p>Taipei 101 was the world&rsquo;s tallest building from 2004 until 2010. Between floors 87 and 92 is a 660 ton steel pendulum. The pendulum serves as a tuned mass damper; it sways to offset movement of the building by strong gusts of winds. Courtesy of Jirka Matousek on flickr. CC-BY.</p>\n",
+  "content_type": "resource",
+  "description": "Taipei 101 was the world's tallest building from 2004 until 2010. Between floors 87 and 92 is a 660 ton steel pendulum. The pendulum serves as a tuned mass damper; it sways to offset movement of the building by strong gusts of winds. Courtesy of Jirka Matousek on flickr. CC-BY.",
+  "draft": false,
+  "file": "/courses/2-04a-systems-and-controls-spring-2013/32f95c737710f240d7d8b73b666dac77_2-04As13-th.jpg",
+  "file_size": 2354,
+  "file_type": "image/jpeg",
+  "image_metadata": {
+    "caption": "Taipei 101 was the world's tallest building from 2004 until 2010. Between floors 87 and 92 is a 660 ton steel pendulum. The pendulum serves as a tuned mass damper; it sways to offset movement of the building by strong gusts of winds. (Courtesy of {{% resource_link \"034e388e-60a6-47aa-be19-6ad49dc6c264\" \"Jirka Matousek\" %}} on flickr. CC-BY.)",
+    "credit": "Courtesy of Jirka Matousek on flickr. CC-BY.",
+    "image-alt": "A photograph of Taipei 101, a skyscraper in Taipei, Taiwan."
+  },
+  "iscjklanguage": false,
+  "learning_resource_types": [],
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "ocw_type": "OCWImage",
+  "resourcetype": "Image",
+  "title": "2-04As13-th.jpg",
+  "uid": "32f95c73-7710-f240-d7d8-b73b666dac77"
+}
