@@ -1,27 +1,28 @@
 from stable_baselines3 import PPO
 import os
 from snakegameenvconvert import SnakeEnv
-import time
 
+CONTINUE_TRAINING = False
 
-models_dir = f"models/{int(time.time())}/"
-logdir = f"logs/{int(time.time())}/"
+models_dir = "/home/littlemoomoo/Littlemoomoo-Python-Learning/PPO stable baseline 3/trained_models"
 
 if not os.path.exists(models_dir):
     os.makedirs(models_dir)
 
-if not os.path.exists(logdir):
-    os.makedirs(logdir)
-
 env = SnakeEnv()
 env.reset()
 
-model = PPO('MlpPolicy', env, verbose=1, tensorboard_log=logdir)
+if CONTINUE_TRAINING == True:
+    model = PPO.load(f"{models_dir}/snakegame_modelv1",env= env)
+else:
+    model = PPO('MlpPolicy', env, verbose=1)
+
 
 TIMESTEPS = 10000
-iters = 0
-while True:
-    iters += 1
+
+
+for i in range(1,20):
     model.learn(total_timesteps=TIMESTEPS,
-                reset_num_timesteps=False, tb_log_name=f"PPO")
-    model.save(f"{models_dir}/{TIMESTEPS*iters}")
+                reset_num_timesteps=False, tb_log_name="PPO")
+    model.save(f"{models_dir}/snakegame_modelv1")
+env.close()

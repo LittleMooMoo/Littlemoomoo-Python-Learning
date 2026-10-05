@@ -9,10 +9,9 @@ import time
 
 SNAKE_LEN_GOAL = 30
 
-
 def collision_with_apple(apple_position, score):
     apple_position = [random.randrange(1, 50)*10, random.randrange(1, 50)*10]
-    score += 1
+    score += 100
     return apple_position, score
 
 
@@ -50,26 +49,7 @@ class SnakeEnv(gym.Env):
 
     def step(self, action):
         while True:
-            cv2.imshow('a', self.img)
-            cv2.waitKey(1)
-            self.img = np.zeros((500, 500, 3), dtype='uint8')
-            # Display Apple
-            cv2.rectangle(self.img, (self.apple_position[0], self.apple_position[1]),
-                          (self.apple_position[0]+10, self.apple_position[1]+10), (0, 0, 255), 3)
-            # Display Snake
-            for position in self.snake_position:
-                cv2.rectangle(self.img, (position[0], position[1]),
-                              (position[0]+10, position[1]+10), (0, 255, 0), 3)
-
-            # Takes step after fixed time
-            t_end = time.time() + 0.000001
-            k = -1
-            while time.time() < t_end:
-                if k == -1:
-                    k = cv2.waitKey(125)
-                else:
-                    continue
-
+            self.previous_len = self.snake_length
             # Change the head position based on the button direction
             if action == 1:
                 self.snake_head[0] += 10
@@ -101,18 +81,23 @@ class SnakeEnv(gym.Env):
                 self.apple_delta_x = self.head_x - self.apple_position[0]
                 self.apple_delta_y = self.head_y - self.apple_position[1]
                 self.snake_length = len(self.snake_position)
-                self.prev_actions = deque(maxlen=SNAKE_LEN_GOAL)
 
+            self.reward = self.score
             if self.done:
-                self.reward = -10
+                self.reward = -10.0
             else:
-                self.reward = self.score
+                self.reward = self.reward + 0.1
 
-            # Update these every step, including when there is no collision.
             self.head_x, self.head_y = self.snake_head
             self.apple_delta_x = self.head_x - self.apple_position[0]
             self.apple_delta_y = self.head_y - self.apple_position[1]
             self.snake_length = len(self.snake_position)
+
+            self.delta_snake_length = self.snake_length - self.previous_len
+
+            self.dist_to_apple = float(np.sqrt(self.apple_delta_x**2 + self.apple_delta_y**2))
+
+            self.reward = self.reward - 0.1 * self.dist_to_apple + self.delta_snake_length
 
             # Record one action. The deque keeps the most recent 30.
             self.prev_actions.append(int(action))
@@ -137,6 +122,7 @@ class SnakeEnv(gym.Env):
         self.apple_position = [random.randrange(
             1, 50)*10, random.randrange(1, 50)*10]
         self.score = 0
+        self.reward = 0
         self.prev_button_direction = 1
         self.button_direction = 1
         self.snake_head = [250, 250]
@@ -149,8 +135,12 @@ class SnakeEnv(gym.Env):
 
         self.apple_delta_x = self.head_x - self.apple_position[0]
         self.apple_delta_y = self.head_y - self.apple_position[1]
+
+        self.dist_to_apple = float(np.sqrt(self.apple_delta_x**2 + self.apple_delta_y**2))
+
         self.snake_length = len(self.snake_position)
         self.prev_actions = deque(maxlen=SNAKE_LEN_GOAL)
+
 
         for _ in range(SNAKE_LEN_GOAL):
             self.prev_actions.append(-1)
@@ -159,9 +149,21 @@ class SnakeEnv(gym.Env):
                 self.head_y,
                 self.apple_delta_x,
                 self.apple_delta_y,
-                self.snake_length,
+                self.snake_length
             ] + list(self.prev_actions),
                 dtype=np.float32,
             )
 
         return self.observation, self.info
+
+    def render(self)->None:
+        self.img = np.zeros((500, 500, 3), dtype='uint8')
+        # Display Apple
+        cv2.rectangle(self.img, (self.apple_position[0], self.apple_position[1]),
+                          (self.apple_position[0]+10, self.apple_position[1]+10), (0, 0, 255), 3)
+        # Display Snake
+        for position in self.snake_position:
+            cv2.rectangle(self.img, (position[0], position[1]),(position[0]+10, position[1]+10), (0, 255, 0), 3)
+
+        cv2.imshow('a', self.img)
+        cv2.waitKey(33)
