@@ -17,22 +17,6 @@ lastx = 0
 lasty = 0
 
 
-def init_controller(model, data):
-    # initialize the controller here. This function is called once, in the beginning
-    pass
-
-
-def controller(model, data):
-    # put the controller here. This function is called inside the simulation.
-    pass
-
-
-def keyboard(window, key, scancode, act, mods):
-    if act == glfw.PRESS and key == glfw.KEY_BACKSPACE:
-        mj.mj_resetData(model, data)
-        mj.mj_forward(model, data)
-
-
 def mouse_button(window, button, act, mods):
     # update button state
     global button_left
@@ -51,13 +35,6 @@ def mouse_button(window, button, act, mods):
 
 
 def mouse_move(window, xpos, ypos):
-    # compute mouse displacement, save
-    global lastx
-    global lasty
-    global button_left
-    global button_middle
-    global button_right
-
     dx = xpos - lastx
     dy = ypos - lasty
     lastx = xpos
@@ -93,12 +70,6 @@ def mouse_move(window, xpos, ypos):
 
     mj.mjv_moveCamera(model, action, dx/height,
                       dy/height, scene, cam)
-
-
-def scroll(window, xoffset, yoffset):
-    action = mj.mjtMouse.mjMOUSE_ZOOM
-    mj.mjv_moveCamera(model, action, 0.0, -0.05 *
-                      yoffset, scene, cam)
 
 
 # get the full path
