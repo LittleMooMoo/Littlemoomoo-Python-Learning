@@ -1,0 +1,94 @@
+{
+  "actuator-prototype.webp": [
+    1600,
+    1600
+  ],
+  "control-code.webp": [
+    1800,
+    872
+  ],
+  "controller-pcb-fabrication.webp": [
+    1200,
+    1600
+  ],
+  "controller-schematic.webp": [
+    1738,
+    1210
+  ],
+  "cycloidal-actuator-cad.webp": [
+    990,
+    940
+  ],
+  "dyno-efficiency.webp": [
+    1348,
+    783
+  ],
+  "dyno-rig-cad.webp": [
+    1410,
+    988
+  ],
+  "encoder-schematic.webp": [
+    741,
+    642
+  ],
+  "leg-kinematics.webp": [
+    1209,
+    481
+  ],
+  "qdd-actuator-cad.webp": [
+    1021,
+    961
+  ],
+  "qdd-planetary-section.webp": [
+    1117,
+    999
+  ],
+  "quadruped-early-cad.webp": [
+    1234,
+    1042
+  ],
+  "quadruped-frame-stress.webp": [
+    1615,
+    994
+  ],
+  "quadruped-geometry.webp": [
+    1155,
+    834
+  ],
+  "quadruped-hardware.webp": [
+    1800,
+    1185
+  ],
+  "quadruped-hero.webp": [
+    1170,
+    835
+  ],
+  "robot-simulation.webp": [
+    960,
+    720
+  ],
+  "rov-body-cad.webp": [
+    1340,
+    1000
+  ],
+  "rov-duct-section.webp": [
+    970,
+    1010
+  ],
+  "rov-flow-analysis.webp": [
+    1592,
+    1031
+  ],
+  "rov-thruster-cad.webp": [
+    1191,
+    944
+  ],
+  "vehicle-filter-comparison.webp": [
+    976,
+    568
+  ],
+  "vehicle-model-fits.webp": [
+    1800,
+    1448
+  ]
+}

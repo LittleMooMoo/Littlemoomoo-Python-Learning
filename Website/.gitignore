@@ -1,0 +1,12 @@
+.sites-runtime/
+.sites-checkout/
+node_modules/
+.env*
+*.tar.gz
+qa/
+__pycache__/
+*.py[cod]
+.venv/
+tools/structural-check.json
+.DS_Store
+Thumbs.db
