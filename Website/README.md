@@ -70,20 +70,33 @@ entries as a guide. Rebuild and preview the affected page.
 
 ## Publish later
 
+GitHub Pages deployment is defined in
+`../.github/workflows/portfolio-pages.yml` with the name **Publish engineering
+portfolio**. In the repository's Settings > Pages, choose **GitHub Actions** as
+the publishing source. Pushing changes in this folder to `main` then builds,
+validates, and deploys only `Website/dist`. The Actions tab also offers a manual
+Run workflow button.
+
+The workflow reads the origin and repository path from GitHub Pages and passes
+`PORTFOLIO_ORIGIN` and `PORTFOLIO_BASE_PATH` to the Python builder. This keeps
+navigation, images, and metadata correct at the GitHub project URL. Running the
+builder normally keeps root-based local preview working.
+
 The directory to publish is `Website/dist` relative to the repository root.
 Configure a static host to serve that directory as the website root, or upload
 its contents. Python is used to generate the pages; the published site runs
 as ordinary HTML, CSS, JavaScript, and images.
 
-Before using a new domain, update `ORIGIN` near the top of `build_portfolio.py`
-and rebuild. That setting controls canonical links, social-preview URLs, the
+For another host, set `PORTFOLIO_ORIGIN` to its origin and, if needed, set
+`PORTFOLIO_BASE_PATH` to the URL prefix before rebuilding. These settings control
+navigation, assets, canonical links, social-preview URLs, the
 sitemap, robots metadata, and the portfolio URL printed on the résumé.
 
-Navigation and asset URLs currently begin with `/` and expect the website at
-the domain root. For a GitHub Pages project URL such as
-`https://username.github.io/Littlemoomoo-Python-Learning/`, those URLs also need
-the repository prefix. Changing `ORIGIN` alone does not make subdirectory
-hosting work. A root-domain Pages site or a custom domain avoids that prefix.
+For a GitHub Pages project URL such as
+`https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/`, use origin
+`https://littlemoomoo.github.io` and base path `/Littlemoomoo-Python-Learning`.
+The workflow does this automatically. The generated files stay directly in
+`dist`; the prefix is part of the URL, not an extra output directory.
 
 The `.openai/hosting.json` file contains only the original Sites project ID
 and static-directory setting; it contains no credentials. It can be retained

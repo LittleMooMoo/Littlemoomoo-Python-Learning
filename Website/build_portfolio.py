@@ -6,17 +6,43 @@ Run with Python 3; no build dependencies are required.
 """
 from pathlib import Path
 from html import escape
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit, urlunsplit, unquote
 import json
+import os
+import re
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'dist'
-ORIGIN = 'https://jiale-jiang-engineering.aglowbard1.chatgpt.site'
+HOST_ORIGIN = os.environ.get('PORTFOLIO_ORIGIN', 'https://jiale-jiang-engineering.aglowbard1.chatgpt.site').rstrip('/')
+origin_parts = urlsplit(HOST_ORIGIN)
+if origin_parts.scheme not in ('http', 'https') or not origin_parts.netloc or origin_parts.path or origin_parts.query or origin_parts.fragment:
+    raise ValueError('PORTFOLIO_ORIGIN must be an HTTP(S) origin without a path, query, or fragment.')
+raw_base_path = os.environ.get('PORTFOLIO_BASE_PATH', '').strip()
+if any(token in raw_base_path for token in ('://', '//', '?', '#', '\\')) or any(unquote(part) in ('.', '..') for part in raw_base_path.split('/')):
+    raise ValueError('PORTFOLIO_BASE_PATH must be a URL path prefix without traversal, query, or fragment.')
+BASE_PATH = '/' + raw_base_path.strip('/') if raw_base_path.strip('/') else ''
+ORIGIN = HOST_ORIGIN + BASE_PATH
 EMAIL = 'jiaxi9142@gmail.com'
 LINKEDIN = 'https://www.linkedin.com/in/jiale-jiang-2277652a9/'
 GITHUB = 'https://github.com/LittleMooMooDingDingCow'
 CYCLICAL_REPO = GITHUB + '/3D-Printed-Cycloidal-Robotic-Actuator'
 ASSET_DIMENSIONS = json.loads((ROOT/'asset-dimensions.json').read_text()) if (ROOT/'asset-dimensions.json').exists() else {}
+
+def site_path(url):
+    """Mount internal links under a repository path without changing external links."""
+    if not BASE_PATH or not url.startswith('/') or url.startswith('//'):
+        return url
+    parts = urlsplit(url)
+    if parts.path == BASE_PATH or parts.path.startswith(BASE_PATH + '/'):
+        return url
+    return urlunsplit(('', '', BASE_PATH + parts.path, parts.query, parts.fragment))
+
+def rewrite_site_urls(document):
+    if not BASE_PATH:
+        return document
+    return re.sub(r'''\b(href|src)=(["'])(/(?!/)[^"']*)\2''',
+                  lambda match: match[1] + '=' + match[2] + site_path(match[3]) + match[2],
+                  document)
 
 def anchor(url, label, cls='line-link', external=False):
     extra = ' target="_blank" rel="noopener noreferrer"' if external else ''
@@ -63,7 +89,7 @@ def page(path,title,description,body,active='',include_closing=False):
     url=ORIGIN+path
     doc=f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><title>{escape(title)} | Jiale Jiang</title><meta name="description" content="{escape(description,quote=True)}"><link rel="canonical" href="{url}"><meta property="og:type" content="website"><meta property="og:title" content="{escape(title,quote=True)} | Jiale Jiang"><meta property="og:description" content="{escape(description,quote=True)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{ORIGIN}/assets/quadruped-hero.webp"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script></head><body>{header(active)}<main id="main">{body}</main>{closing() if include_closing else ''}{footer()}<dialog class="lightbox" aria-label="Project image viewer"><div class="lightbox-top"><button class="lightbox-close" autofocus>Close ×</button></div><img alt=""><p class="lightbox-caption"></p></dialog></body></html>'''
-    dest.write_text(doc,encoding='utf-8')
+    dest.write_text(rewrite_site_urls(doc),encoding='utf-8')
 
 PROJECTS = [
 dict(slug='quadruped',title='Modular quadruped',kind='Robotics · System integration',category='mechanical controls',status='Hardware built · Locomotion in development',image='quadruped-hero',alt='Revised SolidWorks assembly of the twelve-joint quadruped.',summary='A twelve-joint robot connecting printed mechanisms, electronics, and C++ control.',role='Project lead · Robotics developer',period='September 2025 — present',tools='SolidWorks · FDM · C++ / Eigen',stage='Built platform; gait development'),
@@ -179,7 +205,7 @@ def build_resume():
 
 def build_404():
     doc=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Jiale Jiang</title><link rel="stylesheet" href="/assets/site.css"></head><body>{header('')}<main id="main" class="wrap section"><span class="eyebrow">404</span><h1>That page isn’t here.</h1><p class="lede" style="margin-top:24px">You can return to the portfolio or explore the project pages.</p><div class="actions">{anchor('/','Home',cls='pill')}{anchor('/projects/','Projects',cls='pill secondary')}</div></main>{footer()}<script src="/assets/site.js" defer></script></body></html>'''
-    (OUT/'404.html').write_text(doc,encoding='utf-8')
+    (OUT/'404.html').write_text(rewrite_site_urls(doc),encoding='utf-8')
 
 def main():
     build_home();build_projects();build_case_studies();build_about();build_experience();build_contact();build_resume();build_404()
