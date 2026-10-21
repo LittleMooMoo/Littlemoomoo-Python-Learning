@@ -19,5 +19,12 @@
     "description": "Original handwritten engineering derivations and downloadable PDFs by Jiale Jiang.",
     "file": "pages/engineering-notes.html",
     "active": "notes"
+  },
+  {
+    "path": "/engineering-source/",
+    "title": "Selected control source",
+    "description": "Selected source excerpts and recorded offline kinematic verification behind Jiale Jiang’s portfolio.",
+    "file": "pages/engineering-source.html",
+    "active": "projects"
   }
 ]

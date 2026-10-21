@@ -25,8 +25,8 @@ BASE_PATH = '/' + raw_base_path.strip('/') if raw_base_path.strip('/') else ''
 ORIGIN = HOST_ORIGIN + BASE_PATH
 EMAIL = 'jiaxi9142@gmail.com'
 LINKEDIN = 'https://www.linkedin.com/in/jiale-jiang-2277652a9/'
-GITHUB = 'https://github.com/LittleMooMoo'
-CYCLICAL_REPO = GITHUB + '/3D-Printed-17-1-Cycloidal-Robotic-Actuator'
+GITHUB = 'https://github.com/LittleMooMooDingDingCow'
+CYCLICAL_REPO = GITHUB + '/3D-Printed-Cycloidal-Robotic-Actuator'
 ASSET_DIMENSIONS = json.loads((ROOT/'asset-dimensions.json').read_text()) if (ROOT/'asset-dimensions.json').exists() else {}
 
 def site_path(url):

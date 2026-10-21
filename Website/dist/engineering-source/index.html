@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><title>Selected control source | Jiale Jiang</title><meta name="description" content="Selected source excerpts and recorded offline kinematic verification behind Jiale Jiang’s portfolio."><link rel="canonical" href="https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/engineering-source/"><meta property="og:type" content="website"><meta property="og:title" content="Selected control source | Jiale Jiang"><meta property="og:description" content="Selected source excerpts and recorded offline kinematic verification behind Jiale Jiang’s portfolio."><meta property="og:url" content="https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/engineering-source/"><meta property="og:image" content="https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/assets/quadruped-hero.webp"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/Littlemoomoo-Python-Learning/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/Littlemoomoo-Python-Learning/assets/site.css"><script src="/Littlemoomoo-Python-Learning/assets/site.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav-inner"><a href="/Littlemoomoo-Python-Learning/" class="brand" aria-label="Jiale Jiang home"><span class="brand-mark" aria-hidden="true">JJ</span><span>Jiale Jiang<span class="brand-sub">Engineering portfolio</span></span></a><button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><svg width="21" height="18" viewBox="0 0 21 18" aria-hidden="true"><path d="M1 5h19M1 13h19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button><nav class="nav-links" id="main-nav" aria-label="Main navigation"><a href="/Littlemoomoo-Python-Learning/projects/" aria-current="page">Projects</a><a href="/Littlemoomoo-Python-Learning/engineering-notes/">Derivations</a><a href="/Littlemoomoo-Python-Learning/about/">About & education</a><a href="/Littlemoomoo-Python-Learning/experience/">Experience</a><a href="/Littlemoomoo-Python-Learning/contact/">Contact</a><a class="nav-resume" href="/Littlemoomoo-Python-Learning/resume/">Résumé ↗</a></nav></div></header><main id="main"><div class="wrap"><header class="page-heading"><span class="eyebrow">SELECTED IMPLEMENTATION</span><h1>Read the code<br>behind the equations.</h1><p class="lede">Selected implementation excerpts and saved numerical evidence, available directly alongside the project walkthroughs.</p></header><div class="project-layout"><aside class="project-toc"><p>ON THIS PAGE</p><a href="#kinematics">FK / IK / Jacobian</a><a href="#commands">Cartesian commands</a><a href="#derivation">Independent derivation</a><a href="#verification">Saved numerical record</a></aside><article class="project-body"><section id="kinematics"><h2>LegController.cpp: FK, IK, and Jacobian</h2><p class="evidence-note">Control_Code/Locomotion/LegController.cpp · lines 691–794 · source snapshot inspected October 21, 2026</p><div class="code-panel"><div class="code-header">LegController.cpp</div><pre><code>Eigen::Vector3d LegController::forward_kinematic(
+    const Eigen::Vector3d &amp;joint_angles) const
+{ // clang-format off
+    double qh = joint_angles(0);
+    double qt = joint_angles(1);
+    double qs = joint_angles(2);
+    double ls = geometry.shank_length;
+    double lt = geometry.thigh_length;
+    double lh = geometry.hip_length;
+
+    double x = -ls * std::sin(qs - qt) 
+        + lt * std::sin(qt);
+    double y = ls * std::sin(qs) * std::sin(qh) * std::sin(qt) 
+        + ls * std::cos(qs) * std::sin(qh) * std::cos(qt) 
+        + lt * std::cos(qt) * std::sin(qh) 
+        + lh * cos(qh);
+    double z = ls * std::sin(qs) * std::cos(qh) * std::sin(qt) 
+        + ls * std::cos(qs) * std::cos(qh) * std::cos(qt) 
+        + lt * std::cos(qt) * std::cos(qh) 
+        - lh * std::sin(qh);
+    Eigen::Vector3d foot_position_leg_frame;
+    foot_position_leg_frame &lt;&lt; x,
+        y,
+        z;
+    return foot_position_leg_frame;
+}
+//clang-format on
+
+Eigen::Vector3d LegController::inverse_kinematic(
+    const Eigen::Vector3d &amp;foot_positions) const
+{
+    double x = foot_positions(0);
+    double y = foot_positions(1);
+    double z = foot_positions(2);
+    double ls = geometry.shank_length;
+    double lt = geometry.thigh_length;
+    double lh = geometry.hip_length;
+    if (!foot_positions.allFinite() || y * y + z * z &lt; lh * lh)
+    {
+        std::cerr &lt;&lt; &quot;unreachable target, invalid hip position\n&quot;;
+        return invalidVector();
+    }
+    double a = std::sqrt(y * y + z * z - lh * lh);
+    if ((x == 0 &amp;&amp; a == 0) || (lh == 0 &amp;&amp; a == 0))
+    {
+        std::cerr &lt;&lt; &quot;indeterminate target, invalid joint angles\n&quot;;
+        return invalidVector();
+    }
+    double qh = std::atan2(a * y - lh * z, lh * y + a * z);
+    double c = (x * x + a * a - lt * lt - ls * ls) / (2 * ls * lt);
+    if (!std::isfinite(c) || std::abs(c) &gt; 1 + 1e-12)
+    {
+        std::cerr &lt;&lt; &quot;unreachable target, invalid shank angle\n&quot;;
+        return invalidVector();
+    }
+    double qs = std::acos(std::clamp(c, -1.0, 1.0));
+    double b = lt + ls * std::cos(qs);
+    double d = ls * std::sin(qs);
+    double qt = std::atan2(b * x + d * a, b * a - d * x);
+    Eigen::Vector3d joint_angles;
+    joint_angles &lt;&lt; qh,
+        qt,
+        qs;
+
+    return joint_angles;
+}
+
+Eigen::Matrix3d LegController::forward_jacobian_transform(
+    const Eigen::Vector3d &amp;joint_angles) const
+{ // clang-format off
+    double qh = joint_angles(0);
+    double qt = joint_angles(1);
+    double qs = joint_angles(2);
+    double ls = geometry.shank_length;
+    double lt = geometry.thigh_length;
+    double lh = geometry.hip_length;
+    double x = -ls * std::sin(qs - qt)
+        + lt * std::sin(qt);
+    double y = ls * std::sin(qs) * std::sin(qh) * std::sin(qt)
+        + ls * std::cos(qs) * std::sin(qh) * std::cos(qt)
+        + lt * std::cos(qt) * std::sin(qh)
+        + lh * cos(qh);
+    double z = ls * std::sin(qs) * std::cos(qh) * std::sin(qt)
+        + ls * std::cos(qs) * std::cos(qh) * std::cos(qt)
+        + lt * std::cos(qt) * std::cos(qh)
+        - lh * std::sin(qh);
+    Eigen::Matrix3d forward_jacobian;
+    forward_jacobian &lt;&lt;  0, lt * std::cos(qt) + ls * std::cos(qs - qt), -ls * std::cos(qs - qt),
+                        z, -x * std::sin(qh), -ls * std::sin(qs - qt) * std::sin(qh),
+                       -y, -x * std::cos(qh), -ls * std::sin(qs - qt) * std::cos(qh);
+    return forward_jacobian;
+}
+//clang-format on
+
+Eigen::Matrix3d LegController::get_damped_inverse_J(
+    const Eigen::Matrix3d &amp;forward_jacobian) const
+{
+    const Eigen::Matrix3d jacobian_transpose =
+        forward_jacobian.transpose();
+    const Eigen::Matrix3d normal_matrix =
+        jacobian_transpose * forward_jacobian +
+        jacobian_damping * jacobian_damping *
+            Eigen::Matrix3d::Identity();
+    return normal_matrix.ldlt().solve(jacobian_transpose);</code></pre></div></section><section id="commands"><h2>Cartesian commands: desired position and velocity</h2><p class="evidence-note">Control_Code/Locomotion/LegController.cpp · lines 519–565 · source snapshot inspected October 21, 2026</p><div class="code-panel"><div class="code-header">LegController.cpp</div><pre><code>bool LegController::calculateJointVelocity()
+{
+    const auto &amp;foot_velocity = leg_command.foot_velocity_command_vector;
+    auto &amp;joint_velocity = leg_command.joint_velocity_command_vector;
+    if (!foot_velocity.allFinite() || foot_velocity.norm() &gt; max_foot_velocity)
+    {
+        std::cerr &lt;&lt; getName() &lt;&lt; &quot;: invalid or excessive foot velocity [&quot; &lt;&lt; foot_velocity.transpose()
+                  &lt;&lt; &quot;] m/s; maximum norm=&quot; &lt;&lt; max_foot_velocity &lt;&lt; &quot; m/s\n&quot;;
+        return false;
+    }
+    const Eigen::Matrix3d jacobian = forward_jacobian_transform(leg_state.joint_position_state_vector);
+    if (!validateJacobian(jacobian))
+        return false;
+    joint_velocity = get_damped_inverse_J(jacobian) * foot_velocity;
+    return joint_velocity.allFinite();
+}
+
+bool LegController::setFootTargetPDO3()
+{
+    leg_command.joint_feedforward_torque_command_vector.setZero(); // Cartesian trajectory path has no explicit FF input.
+    leg_command.joint_position_command_vector = inverse_kinematic(leg_command.foot_position_command_vector);
+    return calculateJointVelocity() &amp;&amp; stageJointCommandsPDO3();
+}
+
+bool LegController::setJointTargetPDO3()
+{
+    leg_command.foot_position_command_vector = forward_kinematic(leg_command.joint_position_command_vector);
+    leg_command.foot_velocity_command_vector =
+        forward_jacobian_transform(leg_state.joint_position_state_vector) * leg_command.joint_velocity_command_vector;
+    return stageJointCommandsPDO3();
+}
+
+bool LegController::stageJointCommandsPDO3()
+{
+    if (!validateLegCommands())
+        return false;
+    // Validate all joints before staging any; no CAN transmission here.
+    for (std::size_t i = 0; i &lt; joints_per_leg; ++i)
+    {
+        auto &amp;joint = joint_controllers[i];
+        joint.joint_command = {static_cast&lt;float&gt;(leg_command.joint_position_command_vector[i]),
+                               static_cast&lt;float&gt;(leg_command.joint_velocity_command_vector[i]),
+                               static_cast&lt;float&gt;(leg_command.joint_feedforward_torque_command_vector[i])};
+        if (!joint.setTargetPDO3())
+            return false;
+    }
+    return true;</code></pre></div></section><section id="joint-validation"><h2>Joint command validation</h2><p class="evidence-note">Control_Code/Locomotion/JointController.cpp · lines 336–370 · source snapshot inspected October 21, 2026</p><div class="code-panel"><div class="code-header">JointController.cpp</div><pre><code>bool JointController::validateJointCommands(const JointCommand &amp;command) const noexcept
+{
+    if (!hasInitialReference() || !validateJointStates())
+        return false;
+
+    if (!std::isfinite(command.position) ||
+        command.position &lt; safety_limits.position_lower ||
+        command.position &gt; safety_limits.position_upper)
+    {
+        std::cerr &lt;&lt; getName() &lt;&lt; &quot;: absolute position target outside limits\n&quot;;
+        return false;
+    }
+    if (!withinAbsoluteLimit(command.position - joint_state.position, safety_limits.position_error))
+    {
+        std::cerr &lt;&lt; getName() &lt;&lt; &quot;: position command tracking error exceeded\n&quot;;
+        return false;
+    }
+    if (!withinAbsoluteLimit(command.velocity, safety_limits.velocity))
+    {
+        std::cerr &lt;&lt; getName() &lt;&lt; &quot;: velocity target outside limits\n&quot;;
+        return false;
+    }
+    if (!withinAbsoluteLimit(command.feedforward_torque, safety_limits.feedforward_torque_limit))
+    {
+        std::cerr &lt;&lt; getName() &lt;&lt; &quot;: feedforward torque outside limits\n&quot;;
+        return false;
+    }
+    return true;
+}
+
+//============ Command senders ============//
+bool JointController::writePDO2() { return motor.write_pdo_2(); }
+bool JointController::writePDO3()
+{
+    return motor.write_pdo_3(motor_command.position, motor_command.velocity, motor_command.feedforward_torque);</code></pre></div></section><section id="derivation"><h2>Independent transform and Jacobian derivation</h2><p class="evidence-note">tools/Kinematic_Numerical/derive_leg_kinematics.m · lines 54–96 · source snapshot inspected October 21, 2026</p><div class="code-panel"><div class="code-header">derive_leg_kinematics.m</div><pre><code>T01 = simplify(RotX(-h) * Trans(lh * unit_y));
+T12 = simplify(RotY( t) * Trans(lt * unit_z));
+T23 = simplify(RotY(-s) * Trans(ls * unit_z));
+T02 = simplify(T01 * T12);
+T03 = simplify(T02 * T23);
+
+foot_homogeneous = simplify(T03 * sym([0; 0; 0; 1]));
+p = foot_homogeneous(1:3);
+R03 = T03(1:3, 1:3);
+assert(isequal(simplify(R03.&#x27; * R03), sym(eye(3))));
+assert(isequal(simplify(det(R03)), sym(1)));
+disp(&#x27;Forward kinematics, expressed in frame 0:&#x27;);
+disp(p);
+
+%% 3. Express every joint axis and axis point in frame 0
+% Axis signs come from the positive JOINT coordinate definitions.
+% A different motor-facing direction alone does not establish these signs.
+axis_hip_0   = -unit_x;
+axis_thigh_0 = simplify(T01(1:3, 1:3) * unit_y);
+axis_knee_0  = simplify(T02(1:3, 1:3) * (-unit_y));
+
+origin_hip_0   = zero;
+origin_thigh_0 = T01(1:3, 4);
+origin_knee_0  = T02(1:3, 4);
+
+J_hip   = cross(axis_hip_0,   p - origin_hip_0);
+J_thigh = cross(axis_thigh_0, p - origin_thigh_0);
+J_knee  = cross(axis_knee_0,  p - origin_knee_0);
+J_position = simplify([J_hip, J_thigh, J_knee]);
+J_angular = simplify([axis_hip_0, axis_thigh_0, axis_knee_0]);
+J_geometric = [J_position; J_angular];
+
+%% 4. Verify against differentiation and the old working FK
+J_differentiated = simplify(jacobian(p, q));
+assert(isequal(simplify(J_position - J_differentiated), ...
+    sym(zeros(3, 3))));
+
+C = lt*cos(t) + ls*cos(t - s);
+X = lt*sin(t) + ls*sin(t - s);
+old_position = [X;
+                lh*cos(h) + C*sin(h);
+               -lh*sin(h) + C*cos(h)];
+assert(isequal(simplify(p - old_position), sym(zeros(3, 1))));</code></pre></div></section><section id="convention"><h2>Notebook-to-retained convention mapping</h2><p class="evidence-note">tools/Kinematic_Numerical/derive_leg_kinematics.m · lines 132–149 · source snapshot inspected October 21, 2026</p><div class="code-panel"><div class="code-header">derive_leg_kinematics.m</div><pre><code>notebook_T = RotX(nh) * Trans(lh*unit_y) * ...
+             RotY(nt) * Trans(-lt*unit_x) * ...
+             RotY(ns) * Trans(-ls*unit_x);
+notebook_p = simplify(notebook_T(1:3, 4));
+notebook_J = simplify(jacobian(notebook_p, qn));
+
+% Same physical link pose, not merely the same endpoint:
+notebook_q_from_old = [-h; t + sym(pi)/2; -s];
+coordinate_derivative = diag(sym([-1, 1, -1]));
+mapped_p = subs(notebook_p, qn, notebook_q_from_old);
+mapped_J = subs(notebook_J, qn, notebook_q_from_old) * ...
+           coordinate_derivative;
+assert(isequal(simplify(mapped_p - p), sym(zeros(3, 1))));
+assert(isequal(simplify(mapped_J - J_position), sym(zeros(3, 3))));
+% The coordinate axes of the two foot frames have a fixed tool rotation.
+mapped_T = subs(notebook_T, qn, notebook_q_from_old);
+assert(isequal(simplify(mapped_T - T03*RotY(sym(pi)/2)), ...
+    sym(zeros(4, 4))));</code></pre></div></section><section id="verification"><h2>Saved offline verification record</h2><p>The following is the saved October 18 study record. It was inspected for this portfolio update, rather than rerun. Some current source files differ from that recorded snapshot; these are numerical consistency results, rather than physical tracking measurements.</p><div class="code-panel"><div class="code-header">verification_results.json</div><pre><code>{
+  &quot;pose_count&quot;: 6000,
+  &quot;symbolic_handles_checked&quot;: true,
+  &quot;max_position_error_m&quot;: 1.7109685898544713e-16,
+  &quot;max_jacobian_error_m_per_rad&quot;: 9.64560098459799e-11,
+  &quot;max_inverse_roundtrip_error_m&quot;: 1.7567876183194558e-16,
+  &quot;cycles&quot;: [
+    {
+      &quot;speed_scale&quot;: 1,
+      &quot;steps&quot;: 200,
+      &quot;duration_s&quot;: 1,
+      &quot;max_delta_difference_rad&quot;: [
+        2.220446049250313e-16,
+        5.551115123125783e-16,
+        8.881784197001252e-16
+      ],
+      &quot;max_old_step_deg&quot;: [
+        1.2722218725854067e-14,
+        0.4415654475586378,
+        0.76003710013639
+      ],
+      &quot;max_derived_step_deg&quot;: [
+        0,
+        0.4415654475586378,
+        0.76003710013639
+      ],
+      &quot;max_notebook_positive_step_deg&quot;: [
+        0,
+        0.5950056754491675,
+        0.76003710013639
+      ]
+    },
+    {
+      &quot;speed_scale&quot;: 0.2,
+      &quot;steps&quot;: 1000,
+      &quot;duration_s&quot;: 5,
+      &quot;max_delta_difference_rad&quot;: [
+        2.220446049250313e-16,
+        7.771561172376096e-16,
+        8.881784197001252e-16
+      ],
+      &quot;max_old_step_deg&quot;: [
+        1.2722218725854067e-14,
+        0.08832510647589951,
+        0.1520643643695572
+      ],
+      &quot;max_derived_step_deg&quot;: [
+        0,
+        0.08832510647592497,
+        0.1520643643695572
+      ],
+      &quot;max_notebook_positive_step_deg&quot;: [
+        0,
+        0.119014793483169,
+        0.1520643643695572
+      ]
+    },
+    {
+      &quot;speed_scale&quot;: 0.1,
+      &quot;steps&quot;: 2000,
+      &quot;duration_s&quot;: 10,
+      &quot;max_delta_difference_rad&quot;: [
+        2.220446049250313e-16,
+        6.661338147750939e-16,
+        8.881784197001252e-16
+      ],
+      &quot;max_old_step_deg&quot;: [
+        1.2722218725854067e-14,
+        0.04416271030636037,
+        0.07603268450679541
+      ],
+      &quot;max_derived_step_deg&quot;: [
+        0,
+        0.04416271030636037,
+        0.07603268450679541
+      ],
+      &quot;max_notebook_positive_step_deg&quot;: [
+        0,
+        0.05950810799386144,
+        0.07603268450680814
+      ]
+    }
+  ],
+  &quot;status&quot;: &quot;PASS: offline mathematics, not hardware validation&quot;
+}</code></pre></div></section><section id="test-scope"><h2>Single-leg test scope</h2><p>The retained single-leg comparison is diagnostic. Encoder-derived FK reconstructs a foot position from joint readings; it does not independently measure the foot. Powered tracking, calibration, backlash, compliance, and gait robustness need their own checks.</p></section><section id="history"><h2>Recorded revision history</h2><ol class="iteration-timeline"><li><span class="iteration-date">October 17, 2026 · b631754</span><h3>New Jacobian</h3><p>The local Git history records a Jacobian revision.</p></li><li><span class="iteration-date">October 18, 2026 · 2d5e91e</span><h3>Frame convention improved</h3><p>Frames and conventions were revisited.</p></li><li><span class="iteration-date">October 18, 2026 · 4d31969</span><h3>Retained FK / IK / Jacobian convention</h3><p>The recorded change revisits FK and Jacobian signs and adds IK validity checks. The inspected equations are shown in the derivation walkthrough.</p></li></ol></section></article></div></div></main><footer class="site-footer"><div class="wrap"><div class="footer-inner"><span>© 2026 Jiale Jiang · Southern California</span><div class="footer-links"><a href="https://www.linkedin.com/in/jiale-jiang-2277652a9/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://github.com/LittleMooMooDingDingCow" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:jiaxi9142@gmail.com">Email ↗</a></div></div><p class="footer-note">Project photographs, CAD, and technical work from my engineering practice. Team contributions and development stages are described on each project page.</p></div></footer><dialog class="lightbox" aria-label="Project image viewer"><div class="lightbox-top"><button class="lightbox-close" autofocus>Close ×</button></div><img alt=""><p class="lightbox-caption"></p></dialog></body></html>

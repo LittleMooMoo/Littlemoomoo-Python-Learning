@@ -354,7 +354,19 @@ def main() -> None:
         if args.port != 8765:
             raise
         server = ThreadingHTTPServer(('127.0.0.1', 0), EditorHandler)
-    address = 'http://127.0.0.1:' + str(server.server_port) + '/editor'
+    local_origin = 'http://127.0.0.1:' + str(server.server_port)
+    address = local_origin + '/editor'
+    print('Building and checking the local preview...', flush=True)
+    try:
+        startup = build(local_origin)
+    except (OSError, subprocess.SubprocessError) as error:
+        startup = {'ok': False, 'output': str(error)}
+    if startup.get('ok'):
+        print('Local preview is ready at ' + local_origin + '/', flush=True)
+    else:
+        print('Local preview is not ready: the startup build or validation failed.', flush=True)
+        print(startup.get('output', ''), flush=True)
+        print('The editor remains available. Correct the issue, then use Save & build.', flush=True)
     print('Portfolio editor: ' + address, flush=True)
     print('This server is local to your computer. Close this window or press Ctrl+C to stop.', flush=True)
     if not args.no_browser:
