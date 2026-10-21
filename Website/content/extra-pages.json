@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/projects/simulation-control/kinematics/",
+    "title": "FK, IK & Jacobian: a derivation history",
+    "description": "Jiale Jiang’s handwritten kinematics revisions, current C++ equations, transform derivation, and verification boundaries.",
+    "file": "pages/projects-simulation-control-kinematics.html",
+    "active": "projects"
+  },
+  {
+    "path": "/projects/simulation-control/control-evolution/",
+    "title": "From Python trajectories to C++ control",
+    "description": "A source-backed comparison of Python geometric position commands and the C++ Cartesian position/velocity path.",
+    "file": "pages/projects-simulation-control-control-evolution.html",
+    "active": "projects"
+  },
+  {
+    "path": "/engineering-notes/",
+    "title": "Engineering derivations",
+    "description": "Original handwritten engineering derivations and downloadable PDFs by Jiale Jiang.",
+    "file": "pages/engineering-notes.html",
+    "active": "notes"
+  }
+]

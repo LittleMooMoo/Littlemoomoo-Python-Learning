@@ -86,5 +86,109 @@
   "vehicle-model-fits.webp": [
     1800,
     1448
+  ],
+  "evidence/actuator-cad-2026-03-flange.webp": [
+    934,
+    1020
+  ],
+  "evidence/actuator-cad-2026-03-front.webp": [
+    1181,
+    1033
+  ],
+  "evidence/actuator-cad-2026-03-rear.webp": [
+    1280,
+    1044
+  ],
+  "evidence/actuator-team-cutaway.webp": [
+    449,
+    394
+  ],
+  "evidence/cycloidal-early-exploded-cad.webp": [
+    1800,
+    736
+  ],
+  "evidence/cycloidal-early-section-cad.webp": [
+    1800,
+    900
+  ],
+  "evidence/early-body-frame-cad.webp": [
+    638,
+    595
+  ],
+  "evidence/early-leg-module-cad.webp": [
+    735,
+    588
+  ],
+  "evidence/joint-frame-cad-2026-09.webp": [
+    1186,
+    1012
+  ],
+  "evidence/printed-joint-frame.webp": [
+    1350,
+    1800
+  ],
+  "evidence/quadruped-open-frame-2026-08.webp": [
+    991,
+    829
+  ],
+  "evidence/single-leg-test-stand-cad.webp": [
+    444,
+    400
+  ],
+  "notes/body-geometry.webp": [
+    1417,
+    1800
+  ],
+  "notes/body-pd.webp": [
+    1398,
+    1800
+  ],
+  "notes/compact-fk.webp": [
+    1392,
+    1800
+  ],
+  "notes/compact-jacobian.webp": [
+    1800,
+    558
+  ],
+  "notes/corrected-jacobian.webp": [
+    1390,
+    1800
+  ],
+  "notes/cycloidal-profile.webp": [
+    1800,
+    1145
+  ],
+  "notes/differential-ik.webp": [
+    1378,
+    1800
+  ],
+  "notes/differential-jacobian.webp": [
+    1800,
+    1039
+  ],
+  "notes/differential-summary.webp": [
+    1400,
+    1800
+  ],
+  "notes/differential-transforms.webp": [
+    1379,
+    1800
+  ],
+  "notes/early-fk.webp": [
+    1398,
+    1800
+  ],
+  "notes/kalman-gain.webp": [
+    1379,
+    1800
+  ],
+  "notes/mpc-notes.webp": [
+    1392,
+    1800
+  ],
+  "notes/ppo-study.webp": [
+    1379,
+    1800
   ]
 }

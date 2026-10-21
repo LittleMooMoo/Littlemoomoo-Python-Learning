@@ -1,0 +1,96 @@
+{
+  "handwritten_notes": [
+    {
+      "title": "Geometric FK: the early working",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Jacobian%20FK%20%281%29.pdf#page=1",
+      "preview": "/assets/notes/early-fk.webp",
+      "page": 1,
+      "pages": 5,
+      "context": "Hip sketch, triangle geometry, and component derivatives."
+    },
+    {
+      "title": "Correcting the Jacobian",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/jacobian%20corrcted%20%286%29.pdf#page=2",
+      "preview": "/assets/notes/corrected-jacobian.webp",
+      "page": 2,
+      "pages": 8,
+      "context": "Red corrections, derivative working, and damped-mapping reasoning."
+    },
+    {
+      "title": "Compact FK and Jacobian",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Cleaner%20quadruped%20jacobian%20fk%20%288%29.pdf#page=3",
+      "preview": "/assets/notes/compact-jacobian.webp",
+      "page": 3,
+      "pages": 3,
+      "context": "A shorter presentation of the FK, derivatives, and matrix."
+    },
+    {
+      "title": "From transforms to FK, J, and IK",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Differential%20calculus%20based%20kinematic.pdf#page=13",
+      "preview": "/assets/notes/differential-summary.webp",
+      "page": 13,
+      "pages": 17,
+      "context": "Expanded rotation, transform-chain, geometric Jacobian, and IK working."
+    },
+    {
+      "title": "Jacobian-based control working",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Full%20Jacobian%20based%20Gait%20control%20guide%20%283%29.pdf#page=1",
+      "preview": "/assets/leg-kinematics.webp",
+      "page": 1,
+      "pages": 8,
+      "context": "Hip geometry, virtual work, damped least squares, and control-flow notes."
+    },
+    {
+      "title": "Body-posture geometry",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Geometric%20based%20analytical%20imu%20torso%20control%20%282%29.pdf#page=4",
+      "preview": "/assets/notes/body-geometry.webp",
+      "page": 4,
+      "pages": 9,
+      "context": "Body / leg frames, pitch and roll geometry, and position corrections."
+    },
+    {
+      "title": "Quaternion and body PD notes",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/body%20PD%20controller%20%281%29.pdf#page=3",
+      "preview": "/assets/notes/body-pd.webp",
+      "page": 3,
+      "pages": 4,
+      "context": "Orientation-error representations and rotating-frame foot velocity."
+    },
+    {
+      "title": "Cycloidal disk geometry",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/cycloidal%20drive%20equations%20%281%29.pdf#page=1",
+      "preview": "/assets/notes/cycloidal-profile.webp",
+      "page": 1,
+      "pages": 1,
+      "context": "Parametric profile equations, pin geometry, and eccentricity."
+    },
+    {
+      "title": "Centroidal MPC formulation",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/MPC%20derived.pdf#page=1",
+      "preview": "/assets/notes/mpc-notes.webp",
+      "page": 1,
+      "pages": 8,
+      "context": "Preliminary dynamics, contact constraints, and stacked optimization."
+    },
+    {
+      "title": "Kalman gain derivation",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Kalman%20Filter%20derivation%20%281%29.pdf#page=5",
+      "preview": "/assets/notes/kalman-gain.webp",
+      "page": 5,
+      "pages": 6,
+      "context": "Prediction, covariance, innovation, and gain working."
+    },
+    {
+      "title": "Control theory through PPO",
+      "pdf_url": "https://raw.githubusercontent.com/LittleMooMoo/Littlemoomoo-Python-Learning/main/Learning%20material/Control%20theory%20PID%20LQR%20MPC%20PPO%20%284%29.pdf#page=19",
+      "preview": "/assets/notes/ppo-study.webp",
+      "page": 19,
+      "pages": 20,
+      "context": "Independent study of PID, LQR, MPC, neural networks, and PPO."
+    }
+  ],
+  "excluded_assets": [
+    "quadruped-hardware.webp"
+  ],
+  "audit_date": "2026-10-21"
+}

@@ -10,3 +10,4 @@ __pycache__/
 tools/structural-check.json
 .DS_Store
 Thumbs.db
+research/

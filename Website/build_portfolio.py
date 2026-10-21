@@ -10,6 +10,7 @@ from urllib.parse import quote, urlsplit, urlunsplit, unquote
 import json
 import os
 import re
+import shutil
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'dist'
@@ -24,8 +25,8 @@ BASE_PATH = '/' + raw_base_path.strip('/') if raw_base_path.strip('/') else ''
 ORIGIN = HOST_ORIGIN + BASE_PATH
 EMAIL = 'jiaxi9142@gmail.com'
 LINKEDIN = 'https://www.linkedin.com/in/jiale-jiang-2277652a9/'
-GITHUB = 'https://github.com/LittleMooMooDingDingCow'
-CYCLICAL_REPO = GITHUB + '/3D-Printed-Cycloidal-Robotic-Actuator'
+GITHUB = 'https://github.com/LittleMooMoo'
+CYCLICAL_REPO = GITHUB + '/3D-Printed-17-1-Cycloidal-Robotic-Actuator'
 ASSET_DIMENSIONS = json.loads((ROOT/'asset-dimensions.json').read_text()) if (ROOT/'asset-dimensions.json').exists() else {}
 
 def site_path(url):
@@ -38,6 +39,15 @@ def site_path(url):
     return urlunsplit(('', '', BASE_PATH + parts.path, parts.query, parts.fragment))
 
 def rewrite_site_urls(document):
+    def dimensions(match):
+        tag = match.group(0)
+        src = re.search(r'''\bsrc=["']([^"']+)["']''', tag)
+        if src and src[1].startswith('/assets/') and ' width=' not in tag:
+            size = ASSET_DIMENSIONS.get(unquote(src[1][len('/assets/'):]))
+            if size:
+                tag = tag[:-1] + f' width="{size[0]}" height="{size[1]}">'
+        return tag
+    document = re.sub(r'<img\b[^>]*>', dimensions, document)
     if not BASE_PATH:
         return document
     return re.sub(r'''\b(href|src)=(["'])(/(?!/)[^"']*)\2''',
@@ -73,7 +83,7 @@ def sources(items):
     return '<div class="source-links">' + ''.join(anchor(url, label,cls='',external=True) for label,url in items) + '</div>'
 
 def header(active):
-    items = [('projects','/projects/','Projects'),('about','/about/','About & education'),('experience','/experience/','Experience'),('contact','/contact/','Contact')]
+    items = [('projects','/projects/','Projects'),('notes','/engineering-notes/','Derivations'),('about','/about/','About & education'),('experience','/experience/','Experience'),('contact','/contact/','Contact')]
     links = ''.join(f'<a href="{href}"'+(' aria-current="page"' if active==key else '')+f'>{label}</a>' for key,href,label in items)
     return f'''<a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav-inner"><a href="/" class="brand" aria-label="Jiale Jiang home"><span class="brand-mark" aria-hidden="true">JJ</span><span>Jiale Jiang<span class="brand-sub">Engineering portfolio</span></span></a><button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><svg width="21" height="18" viewBox="0 0 21 18" aria-hidden="true"><path d="M1 5h19M1 13h19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button><nav class="nav-links" id="main-nav" aria-label="Main navigation">{links}<a class="nav-resume" href="/resume/">Résumé ↗</a></nav></div></header>'''
 
@@ -84,6 +94,13 @@ def closing():
     return f'''<section class="closing dark"><div class="wrap closing-inner"><div><span class="eyebrow">NEXT CONVERSATION</span><h2>Let’s talk engineering.</h2><p>Robotics internships, research, and people who enjoy building things.</p></div>{anchor('/contact/','Get in touch',cls='pill')}</div></section>'''
 
 def page(path,title,description,body,active='',include_closing=False):
+    name = {'/':'home'}.get(path, path.strip('/'))
+    editable = ROOT/'content'/'pages'/(name+'.html')
+    if editable.is_file():
+        body = editable.read_text(encoding='utf-8')
+    body = body.replace('<!--PROJECT_CARDS-->', ''.join(card(p) for p in PROJECTS[:4]))
+    entries = ''.join(f'<article class="resume-entry"><h3><a href="/projects/{p["slug"]}/">{p["title"]} ↗</a></h3><p class="date">{p["role"]} · {p["period"]}</p><p>{p["summary"]} {p["stage"]}.</p></article>' for p in PROJECTS)
+    body = body.replace('<!--RESUME_PROJECTS-->', entries)
     dest=OUT / path.strip('/') / 'index.html' if path!='/' else OUT/'index.html'
     dest.parent.mkdir(parents=True,exist_ok=True)
     url=ORIGIN+path
@@ -91,14 +108,7 @@ def page(path,title,description,body,active='',include_closing=False):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#ffffff"><title>{escape(title)} | Jiale Jiang</title><meta name="description" content="{escape(description,quote=True)}"><link rel="canonical" href="{url}"><meta property="og:type" content="website"><meta property="og:title" content="{escape(title,quote=True)} | Jiale Jiang"><meta property="og:description" content="{escape(description,quote=True)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{ORIGIN}/assets/quadruped-hero.webp"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script></head><body>{header(active)}<main id="main">{body}</main>{closing() if include_closing else ''}{footer()}<dialog class="lightbox" aria-label="Project image viewer"><div class="lightbox-top"><button class="lightbox-close" autofocus>Close ×</button></div><img alt=""><p class="lightbox-caption"></p></dialog></body></html>'''
     dest.write_text(rewrite_site_urls(doc),encoding='utf-8')
 
-PROJECTS = [
-dict(slug='quadruped',title='Modular quadruped',kind='Robotics · System integration',category='mechanical controls',status='Hardware built · Locomotion in development',image='quadruped-hero',alt='Revised SolidWorks assembly of the twelve-joint quadruped.',summary='A twelve-joint robot connecting printed mechanisms, electronics, and C++ control.',role='Project lead · Robotics developer',period='September 2025 — present',tools='SolidWorks · FDM · C++ / Eigen',stage='Built platform; gait development'),
-dict(slug='cycloidal-actuator',title='Cycloidal actuators',kind='Mechanical design · Prototyping',category='mechanical',status='Built prototypes · Design iteration',image='cycloidal-actuator-cad',alt='Cycloidal actuator CAD with a circular output flange and printed enclosure.',summary='Printed robotic joints, evolving from a 17:1 reduction toward greater torque margin.',role='Mechanical designer · Test engineer',period='September 2025 — present',tools='SolidWorks · FDM · Bench testing',stage='Prototypes built; revisions ongoing'),
-dict(slug='motor-control',title='Electronics & motor control',kind='Electronics · Embedded systems',category='electronics controls',status='Prototype PCB · CAN integration',image='actuator-prototype',alt='Unpopulated prototype controller PCB fitted to a printed actuator housing.',summary='PCB development, encoder circuits, and the software between a desired motion and a motor command.',role='PCB & embedded developer',period='September 2025 — present',tools='KiCad · STM32 · SocketCAN',stage='Board bring-up incomplete',photo=True),
-dict(slug='planetary-qdd',title='Planetary QDD design',kind='Mechanical design · Gear geometry',category='mechanical electronics',status='CAD design study',image='qdd-planetary-section',alt='Quasi-direct-drive actuator CAD exposing the sun, planet, and ring gears.',summary='A compact planetary actuator study balancing reduction geometry and motor packaging.',role='Mechanical design & integration',period='2026 — present',tools='SolidWorks · Gear geometry',stage='CAD and packaging study'),
-dict(slug='simulation-control',title='Simulation & control',kind='Kinematics · Modeling · Learning',category='controls',status='Model validation · Learning in development',image='robot-simulation',alt='CAD-derived quadruped model in a dark MuJoCo scene.',summary='Analytical kinematics, CAD-derived dynamics, and a reproducible robot learning pipeline.',role='Controls & simulation developer',period='2026 — present',tools='C++ / Eigen · MuJoCo · Python',stage='Pipeline checks; policy development',black=True),
-dict(slug='rov-thruster',title='ROV thruster design',kind='Fluid analysis · Mechanical design',category='mechanical',status='CFD study · Prototype testing',image='rov-thruster-cad',alt='CAD design of a ducted propeller for a remotely operated underwater vehicle.',summary='A ducted underwater thruster developed through CAD, flow simulation, and prototype tests.',role='Mechanical design lead',period='June — October 2025',tools='SolidWorks · Flow Simulation',stage='Prototype designed and tested'),
-]
+PROJECTS = json.loads((ROOT / 'content' / 'projects.json').read_text(encoding='utf-8'))
 
 def card(p):
     cls='project-card'+(' photo' if p.get('photo') else '')+(' black' if p.get('black') else '')
@@ -125,66 +135,21 @@ def build_projects():
     page('/projects/','Engineering projects','Explore Jiale Jiang’s engineering case studies in quadruped robotics, actuator design, motor control, simulation, and underwater thrusters.',body,'projects',True)
 
 def build_case_studies():
-    project_page(PROJECTS[0],
-        'A twelve-joint robotics platform connecting serviceable mechanical modules, printed actuators, and CAN-based control.',
-        'Revised quadruped CAD assembly, showing my mechanical layout and joint packaging.',[
-        ('challenge','The engineering problem','''<p class="lead-copy">A robot becomes a system when its mechanical interfaces, electronics, and control conventions work together.</p><p>I led the mechanical and robotics development of a modular quadruped, working from SolidWorks assemblies to printed hardware and coordinated leg motion. A central design goal was making the joints and leg modules accessible for assembly, testing, and revision.</p>'''),
-        ('design','My contribution',f'''<ul class="bullets"><li>Designed printed body and leg structures, actuator interfaces, and serviceable assemblies.</li><li>Developed analytical forward and inverse kinematics and checked the geometry against CAD.</li><li>Prototyped leg trajectories in Python and developed the Linux C++/Eigen control stack with SocketCAN.</li><li>Helped teammates work through assembly, CAN communication, and subsystem testing.</li></ul><div class="evidence-grid">{figure('quadruped-early-cad','An earlier enclosed-body CAD revision. The later assembly above exposes a different frame layout.','Earlier robot CAD with body covers and a carrying handle.')}</div>'''),
-        ('analysis','Geometry and analysis',f'''<p>Leg geometry needs a consistent joint convention before it can become a motor command. I used CAD measurements and handwritten derivations to connect joint angles with foot position, then compared analytical calculations in software.</p><div class="evidence-grid">{figure('quadruped-geometry','Joint angles and foot-placement dimensions checked in CAD.')}{figure('leg-kinematics','My handwritten hip-geometry reasoning, connecting a coordinate sketch with trigonometric relationships.')}</div>{equation('Foot velocity and joint motion','v<sub>foot</sub> = J(q) q̇','The Jacobian J relates joint rates q̇ to foot velocity at the current configuration q. Calibration, motor direction, gearing, and offsets are handled separately from the geometric model.')}{figure('quadruped-frame-stress','Exploratory von Mises stress analysis of a frame component. The result depends on the modeled loads, fixtures, and material assumptions; it is not a fatigue-life certification.',full=True)}'''),
-        ('outcome','What the prototype demonstrated',outcome('Coordinated motion; reliable forward walking remains in development.','The assembled platform produced repeatable coordinated leg trajectories and limited backward, lateral, and crawl motion. I’m continuing work on calibration, single-leg behavior, and full locomotion. The robot’s operating electronics use off-the-shelf drivers; the custom controller-board project has its own development status.')+'''<p style="margin-top:24px">The most useful lesson has been to isolate the problem. A coordinate sign, a mechanical clearance, and a communication timing issue can each look like a control failure until they are tested separately.</p>'''+sources([('Quadruped repository','https://github.com/eluluke/Quadruped-Robot')]))])
+    for p in PROJECTS:
+        sections = [(s['id'], s['title'], (ROOT/'content'/s['file']).read_text(encoding='utf-8')) for s in p['sections']]
+        project_page(p, p['lede'], p['hero_caption'], sections)
 
-    project_page(PROJECTS[1],
-        'Printed robotic joints developed through repeated geometry, bearing, assembly, and bench-test revisions.',
-        'Cycloidal actuator CAD showing the printed enclosure, output mounting pattern, and surrounding hardware.',[
-        ('challenge','A joint I could build and revise','''<p class="lead-copy">The actuator sets the limits of the whole robot: torque, speed, stiffness, heat, and packaging all meet at the joint.</p><p>I developed cycloidal actuator assemblies using parametric CAD and FDM fabrication. Repeated prototypes helped me work through disk and pin geometry, bearings, shafts, tolerances, and assembly. The original 17:1 design became a starting point for a revised 25:1 version with greater torque margin.</p>'''),
-        ('design','Design and manufacturing decisions',f'''<p>I used prototype results to revisit clearances, bearing selection, print orientation, and the mechanical interfaces between the reducer, motor, and robot leg. Separate bills of materials document the 17:1 and 25:1 assemblies, including their different output-shaft sleeve bearings.</p>{figure('actuator-prototype','Packaging check: an unpopulated custom PCB mounted on a printed actuator housing. This photograph demonstrates fabrication and fit, not a functioning custom FOC controller.',photo=True,full=True)}{equation('Ideal reduction relationships','ω<sub>out</sub> = ω<sub>motor</sub> / G<br>τ<sub>out</sub> ≈ η G τ<sub>motor</sub>','G is the reduction ratio and η is drivetrain efficiency. More reduction increases available output torque for a given motor torque while reducing output speed. Actual output depends on losses, heat, and the motor operating point.')}{equation('Inertia reflected to the motor','J<sub>load → motor</sub> = J<sub>load</sub> / G²','This ideal relationship describes load inertia seen at the motor. Motor inertia reflected to the output follows the opposite scaling, Jmotor · G²; a higher reduction can therefore affect joint responsiveness.')}'''),
-        ('testing','Building a way to measure',f'''<p>I developed a dynamometer layout and used fixture tests to examine torque, efficiency, backlash, stiffness, durability, and thermal behavior. These tests helped distinguish a geometry that assembled successfully from a joint that behaved usefully under load.</p><div class="evidence-grid">{figure('dyno-rig-cad','CAD layout for a motor dynamometer, including the base, shaft supports, and load hardware.')}{figure('dyno-efficiency','Experimental analysis plot comparing reported mechanical and power efficiency with torque. It records one test dataset, not a rated actuator efficiency.')}</div><p style="margin-top:24px">I keep the test conditions attached to the data. A plotted result can guide a revision without establishing a continuous torque or lifetime rating.</p>'''),
-        ('outcome','An evolving actuator platform',outcome('Built prototypes, published CAD, and a revised reduction.','Printed actuators were integrated into the quadruped prototype. The repository retains the original 17:1 design and documents a revised 25:1 assembly; the original version is no longer maintained. Motor development uses an ST development board and Berkeley Humanoid Lite / Recoil firmware. Custom-board bring-up remains a separate project.')+sources([('Actuator repository',CYCLICAL_REPO),('Berkeley Humanoid Lite foundation','https://github.com/HybridRobotics/berkeley-humanoid-lite')]))])
 
-    project_page(PROJECTS[2],
-        'Working across prototype PCBs, encoder feedback, embedded firmware, and CAN communication.',
-        'Fabricated, unpopulated controller PCB fitted to an actuator housing for packaging checks.',[
-        ('challenge','The interfaces between hardware and motion','''<p class="lead-copy">A motor command is only useful when the hardware, feedback, units, and communication agree.</p><p>I co-developed a controller schematic based on an open-source architecture, collaborated on layout, and worked through manufacturing, hand assembly, rework, and bench testing. Alongside the board development, I built Python and C++ communication tools for the robot’s motor drivers.</p>'''),
-        ('design','Electronics and prototype evidence',f'''<div class="evidence-grid">{figure('controller-pcb-fabrication','Custom controller PCBs after fabrication, before component assembly.',photo=True)}{figure('encoder-schematic','AS5600 encoder schematic work: 3.3 V supply, decoupling, and I²C pull-ups.')}</div>{figure('controller-schematic','Motor-controller schematic study adapted from Berkeley Humanoid Lite. The architecture includes the MCU, three-phase power stage, gate driver, sensing, power, and CAN circuits.',full=True)}<p style="margin-top:24px">Building on Berkeley Humanoid Lite and Recoil, I worked on schematic adaptation and packaging, collaborated on PCB layout, and developed the host-side integration.</p>'''),
-        ('control','Communication and control',f'''<p>The host tools handle SocketCAN communication, telemetry, fault logging, and motor coordinate conventions. I worked with watchdogs, bounded commands, readbacks, and isolated tests to investigate wiring, adapters, firmware timing, and behavior under load.</p>{equation('Position, velocity, and feedforward torque','τ = K<sub>p</sub>(q<sub>des</sub> − q) + K<sub>d</sub>(q̇<sub>des</sub> − q̇) + τ<sub>ff</sub>','The custom Recoil control mode combines position error, velocity error, and a feedforward torque command. The documented interface uses output-joint radians, radians per second, and newton-metres; this implementation uses its own packet format.')}{figure('control-code','C++ joint-test source with controller settings, CAN configuration, bounded torque, and stop handling. Source code shows implementation choices; it does not by itself establish powered-hardware performance.',full=True)}'''),
-        ('outcome','What worked, and what needs another revision',outcome('The first custom board did not reach working operation.','The board was fabricated, assembled, reworked, and tested, but the first custom FOC PCB did not operate successfully. I used off-the-shelf drivers to keep the robot integration work moving. The failure made power, sensing, wiring, and firmware bring-up checks more concrete and informed the next controller revision.')+'''<p style="margin-top:24px">I treat the custom board, the firmware extension, and the robot’s motor-driver integration as separate engineering outcomes. Each needs its own evidence.</p>'''+sources([('Berkeley Humanoid Lite','https://github.com/HybridRobotics/berkeley-humanoid-lite')]))])
+def build_extra_pages():
+    config = ROOT/'content'/'extra-pages.json'
+    if not config.exists():
+        return []
+    pages = json.loads(config.read_text(encoding='utf-8'))
+    for p in pages:
+        body = (ROOT/'content'/p['file']).read_text(encoding='utf-8')
+        page(p['path'], p['title'], p['description'], body, p.get('active','projects'))
+    return [p['path'] for p in pages]
 
-    project_page(PROJECTS[3],
-        'A compact planetary actuator study exploring the relationship between gear geometry, reduction, and motor packaging.',
-        'Planetary QDD CAD cutaway. This is a design-study assembly, not evidence of a manufactured and performance-tested actuator.',[
-        ('challenge','Revisiting the actuation tradeoff','''<p class="lead-copy">After working with cycloidal joints, I began studying a lower-reduction planetary layout for quasi-direct-drive actuation.</p><p>The design work focuses on fitting the sun, planets, ring, bearings, and output structure into a compact motor package. Several gear candidates are retained in the CAD history as the geometry and interfaces evolve.</p>'''),
-        ('geometry','Start with the geometric relationships',f'''<p>For a simple planetary set, tooth counts and planet-center spacing need to be compatible with both gear meshes. Changing the carrier spacing affects the sun–planet and planet–ring interfaces together.</p>{equation('Compatible tooth counts','N<sub>r</sub> = N<sub>s</sub> + 2N<sub>p</sub>','For gears sharing the same module and standard pitch geometry, the ring tooth count Nr equals the sun tooth count Ns plus twice the planet tooth count Np.')}{equation('Fixed ring · Sun input · Carrier output','G = 1 + N<sub>r</sub> / N<sub>s</sub><br>PCD<sub>carrier</sub> = m(N<sub>s</sub> + N<sub>p</sub>)','G is the ideal speed-reduction ratio for this stated configuration. The carrier pitch-circle diameter follows from the module m and the sun–planet center distance. These are design relationships, not measured performance.')}{figure('qdd-actuator-cad','Exterior packaging study showing the motor and actuator structure developed in CAD.',full=True)}'''),
-        ('design','What I’m working through','''<ul class="bullets"><li>Compare reduction candidates against the available motor and housing envelope.</li><li>Check planet placement and support, output interfaces, and assembly access.</li><li>Connect encoder and motor-controller packaging with the mechanical layout.</li><li>Keep candidate geometry distinct from a finalized, manufactured design.</li></ul>'''),
-        ('outcome','Current stage',outcome('CAD geometry and packaging study.','The repository contains multiple gear candidates and actuator CAD. I have not established a finalized manufactured QDD ratio, a continuous torque rating, or validated strength and fatigue performance. The next steps are to settle the assembly, specify the manufacturing and material assumptions, then test a physical prototype.'))])
-
-    jacobian='''const Eigen::Matrix3d jacobian_transpose =
-    forward_jacobian.transpose();
-const Eigen::Matrix3d normal_matrix =
-    jacobian_transpose * forward_jacobian +
-    jacobian_damping * jacobian_damping *
-        Eigen::Matrix3d::Identity();
-return normal_matrix.ldlt().solve(jacobian_transpose);'''
-    masscode='''axes = b.ximat[index].reshape(3, 3)
-delta = b.xipos[index] - center
-inertia += axes @ np.diag(new.body_inertia[index]) @ axes.T
-inertia += new.body_mass[index] * (
-    np.dot(delta, delta) * np.eye(3) - np.outer(delta, delta)
-)'''
-    project_page(PROJECTS[4],
-        'Connecting analytical kinematics, complete CAD mass properties, and a reproducible MuJoCo learning pipeline.',
-        'MuJoCo preview of the CAD-derived articulated robot model. A simulation scene is not a demonstration of learned walking.',[
-        ('kinematics','From leg geometry to C++ control',f'''<p class="lead-copy">I want the model and the software to agree about the robot before asking a controller to use them.</p><p>My control work includes analytical forward and inverse kinematics, Jacobian calculations, and numerical comparisons. The geometry is separate from actuator signs, offsets, and gearing, so the same leg model can be checked independently of motor hardware.</p>{equation('Damped least-squares mapping','q̇ = (JᵀJ + λ²I)<sup>−1</sup> Jᵀv<sub>foot</sub>','The damping term λ²I regularizes the Jacobian calculation. The C++ implementation below uses a linear solve to compute the mapping instead of explicitly inverting the matrix.')}{code('LegController.cpp · damped Jacobian solve','C++ / Eigen',jacobian)}{figure('leg-kinematics','Handwritten kinematic derivation used alongside CAD and numerical checks.',full=True)}'''),
-        ('model','Mass properties are part of the model',f'''<p>A CAD export can have the right shape and still omit mass-bearing components. I worked through component accounting, center of mass, inertia orientation, and frame conventions before using the model as a dynamics foundation.</p><p>The corrected simulation model has <strong>13 links, 12 moving joints, and 12.54 kg of CAD-derived mass</strong>. That number describes this model and component snapshot; it is not a measured weight for every physical robot revision.</p>{equation('Rotate and shift each component inertia','I<sub>total</sub> = Σ [R<sub>i</sub>I<sub>i</sub>R<sub>i</sub>ᵀ + m<sub>i</sub>((d<sub>i</sub>·d<sub>i</sub>)I − d<sub>i</sub>d<sub>i</sub>ᵀ)]','Each component inertia is rotated into a common frame, then shifted to the aggregate center of mass with the parallel-axis theorem. The component masses are accounted for directly rather than scaled by a single global factor.')}{code('verify_mass_correction.py · inertia aggregation','Python / NumPy',masscode)}'''),
-        ('pipeline','A learning pipeline with explicit contracts','''<p>The current learning work uses MuJoCo and Python, versioned experiment settings, saved checkpoints, and ONNX policy-export checks. The observation and action definitions are explicit: 83 observations and 36 actions, with position, velocity, and feedforward-torque commands for the twelve joints.</p><div class="outcome"><span class="outcome-label">DOCUMENTED PIPELINE CHECKS · OCTOBER 2026</span><h3>Check the interfaces before evaluating the behavior.</h3><p>The current validation record reports 57 regression tests, a short training smoke run, and Python-to-ONNX parity checks. These establish useful pipeline checks; successful locomotion requires a separate behavioral evaluation.</p></div>'''),
-        ('outcome','Current stage',outcome('The model and pipeline are foundations for further control work.','The smoke policy mostly stands and has not demonstrated learned walking or trotting. Contact behavior, motor limits, drivetrain dynamics, and transfer to powered hardware still need validation. LQR and centroidal MPC remain preliminary study and development work.')+'''<p style="margin-top:24px">This project has taught me to ask two different questions: does the software execute consistently, and does the model reproduce the behavior I need?</p>''')])
-
-    project_page(PROJECTS[5],
-        'A ducted propeller for an underwater ROV, developed through mechanical design, flow simulation, and prototype testing.',
-        'Ducted thruster CAD developed for the underwater ROV project.',[
-        ('challenge','Designing useful underwater thrust','''<p class="lead-copy">The thruster needed a geometry the team could fabricate, integrate, and test.</p><p>As mechanical design lead, I developed the ducted propeller and thruster assembly in SolidWorks, studied the flow using Flow Simulation, and worked with the electrical team on prototype integration. I also helped teammates understand the CFD setup, assembly, and testing process.</p>'''),
-        ('analysis','Use flow analysis to inform the geometry',f'''<p>I used the duct and rotating-region model to examine the flow around the propeller and compare the design choices. Velocity trajectories made it easier to discuss what the duct was doing and where a revision might be useful.</p><div class="evidence-grid">{figure('rov-flow-analysis','SolidWorks Flow Simulation study showing velocity trajectories through the duct. The displayed m/s scale belongs to this design study.')}{figure('rov-duct-section','Semi-transparent CAD view showing the duct and internal rotor geometry. This is a design view, not a measured flow result.')}</div>{equation('Connect thrust and mass flow','T ≈ ṁ(v<sub>out</sub> − v<sub>in</sub>)','This simplified momentum relationship helps interpret propeller flow. It neglects pressure and other control-volume terms; full performance depends on the geometry, speed, flow conditions, and test setup.')}'''),
-        ('testing','Prototype and team integration',f'''<p>The project moved from CAD and CFD into fabricated prototypes and testing. Prototype testing produced approximately 10 N of thrust under the project’s test conditions.</p><p>The work also involved explaining manufacturing and installation considerations to teammates, aligning mechanical interfaces with the electrical system, and making the assembly testable.</p>{figure('rov-body-cad','Overall ROV body concept showing possible thruster placement and integration interfaces.',full=True)}'''),
-        ('outcome','What I learned',outcome('CAD and CFD supported a tested prototype.','This project gave me experience connecting a fluid-mechanics model with fabrication and team integration. It also reinforced the need to compare analysis with measurements before making a performance claim.'))])
 
 def build_about():
     body=f'''<div class="wrap"><header class="page-heading"><span class="eyebrow">ABOUT & EDUCATION</span><h1>I learn by building,<br>then asking why.</h1><p class="lede">Mechanical engineering student. Robotics systems developer. Interested in the point where mechanics, control, and real hardware meet.</p></header><section class="section-small" style="padding-top:20px"><div class="about-grid"><div><span class="small-label">Jiale Jiang · Southern California</span><h2>From an equation<br>to a working part.</h2></div><div class="story"><p>I learn best when an equation becomes something I can build and measure. That curiosity has taken me from a ducted ROV thruster to printed actuators and a twelve-joint quadruped.</p><p>Working across mechanics, electronics, and software has taught me to question assumptions, document failed tests, and make each subsystem understandable to the people working alongside me.</p><p>I’m continuing to develop those habits through coursework, independent technical study, and collaborative robotics work.</p></div></div></section><section class="section-small" id="education"><span class="eyebrow">ACADEMIC FOUNDATION</span><h2>Education & coursework.</h2><div class="education-card"><h3>Mount San Antonio College</h3><p class="school-meta">Mechanical engineering transfer preparation · Walnut, California<br>2023 — present</p><p class="recognition">President’s List · Fall 2025 and Spring 2026</p><div class="course-grid"><div><h4>Completed coursework</h4><ul><li>Calculus I, II, and III</li><li>Linear Algebra & Differential Equations</li><li>Engineering Physics I and II</li><li>Statics</li><li>Engineering Graphics</li><li>Chemistry</li></ul></div><div><h4>In progress · Fall 2026</h4><ul><li>Dynamics</li><li>MATLAB for Engineers</li><li>Properties of Materials</li><li>Critical Thinking and Writing · English C1001</li></ul><p class="semester">Course status reflects October 2026.</p></div></div></div></section><section class="section-small"><span class="eyebrow">TOOLS I USE IN MY PROJECTS</span><h2>Across the engineering stack.</h2><div class="tools-grid"><div><h3>Mechanical design</h3><p>SolidWorks, parametric CAD, FDM prototyping, assembly design, engineering drawings, structural and flow analysis.</p></div><div><h3>Electronics & embedded</h3><p>KiCad, STM32 development, magnetic encoder circuits, PCB assembly and rework, CAN communication, bench diagnostics.</p></div><div><h3>Software & modeling</h3><p>Python, C++, Eigen, Linux / SocketCAN, MATLAB, MuJoCo, analytical kinematics, numerical validation, learning-pipeline experiments.</p></div></div></section><section class="section-small"><div class="collaboration-note"><h3>Make room for other people to contribute.</h3><p>I’ve helped teammates learn soldering, assembly, CAN communication, and technical testing. Breaking a subsystem into small checks helped teammates own work such as the IMU integration, while keeping the interfaces understandable to the rest of the team.</p><div class="actions">{anchor('/projects/','See the projects')}{anchor('/experience/','Earlier work experience')}</div></div></section></div>'''
@@ -208,9 +173,13 @@ def build_404():
     (OUT/'404.html').write_text(rewrite_site_urls(doc),encoding='utf-8')
 
 def main():
+    OUT.mkdir(parents=True, exist_ok=True)
+    if (ROOT/'public').exists():
+        shutil.copytree(ROOT/'public', OUT, dirs_exist_ok=True)
     build_home();build_projects();build_case_studies();build_about();build_experience();build_contact();build_resume();build_404()
-    paths=['/','/projects/','/about/','/experience/','/contact/','/resume/']+['/projects/'+p['slug']+'/' for p in PROJECTS]
-    urls=''.join(f'<url><loc>{ORIGIN+p}</loc><lastmod>2026-10-11</lastmod></url>' for p in paths)
+    extra_paths = build_extra_pages()
+    paths=['/','/projects/','/about/','/experience/','/contact/','/resume/']+['/projects/'+p['slug']+'/' for p in PROJECTS] + extra_paths
+    urls=''.join(f'<url><loc>{ORIGIN+p}</loc><lastmod>2026-10-21</lastmod></url>' for p in paths)
     (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+urls+'</urlset>',encoding='utf-8')
     (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\nSitemap: '+ORIGIN+'/sitemap.xml\n',encoding='utf-8')
     print(json.dumps({'pages':len(paths),'project_pages':len(PROJECTS),'output':str(OUT)}))

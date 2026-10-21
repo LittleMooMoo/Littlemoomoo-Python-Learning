@@ -50,7 +50,13 @@ for p,q in parsers.items():
         if not target.exists():errors.append(str(p)+': missing '+link)
         elif u.fragment and target.suffix=='.html' and (target not in parsers or unquote(u.fragment) not in parsers[target].ids):errors.append(str(p)+': missing anchor '+link)
 for p in ROOT.rglob('*'):
-    if p.suffix.lower() in {'.docx','.pdf','.env','.py','.md'}:errors.append('Unexpected source document in public bundle: '+str(p))
-report={'html_pages':len(parsers),'project_pages':len(list((ROOT/'projects').glob('*/index.html'))),'images':len(list((ROOT/'assets').glob('*.webp'))),'errors':errors,'public_bundle_bytes':sum(p.stat().st_size for p in ROOT.rglob('*') if p.is_file())}
+    if p.suffix.lower() in {'.docx','.env','.py','.md'}:errors.append('Unexpected source document in public bundle: '+str(p))
+    if p.suffix.lower()=='.pdf' and not p.is_relative_to(ROOT/'documents'):
+        errors.append('PDF must be intentionally published under documents/: '+str(p))
+    if p.name=='quadruped-hardware.webp':errors.append('Excluded reference image remains in public bundle')
+for p in ROOT.rglob('*.html'):
+    if 'quadruped-hardware' in p.read_text(encoding='utf-8'):
+        errors.append('Excluded reference image remains in page: '+str(p))
+report={'html_pages':len(parsers),'project_pages':len(list((ROOT/'projects').glob('*/index.html'))),'images':len(list((ROOT/'assets').rglob('*.webp'))),'errors':errors,'public_bundle_bytes':sum(p.stat().st_size for p in ROOT.rglob('*') if p.is_file())}
 print(json.dumps(report,indent=2));(Path(__file__).parent/'structural-check.json').write_text(json.dumps(report,indent=2))
 raise SystemExit(bool(errors))

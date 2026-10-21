@@ -1,109 +1,67 @@
 # Jiale Jiang engineering portfolio
 
-This folder contains the editable source and complete static website, copied
-into the Python learning repository for editing and future publishing.
-It includes the home page, project index, six project case studies, education,
-work experience, contact, a printable résumé, and a 404 page.
+The live GitHub Pages site is https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/ .
 
-The copy is local. Copying these files does not publish a new website or update
-the existing public site.
+## Edit without changing Python or HTML
 
-## Files to edit
+1. Double-click **OPEN_EDITOR.cmd** in this folder. Keep its terminal open while editing.
+2. The local browser editor opens. Choose a page or project section from the left.
+3. Click the text to edit it. Use the toolbar for headings, lists, and links.
+4. Expand **Add a photograph, drawing, or original PDF** to choose a file. Add a caption and alternative text. A handwritten preview can include its original PDF link.
+5. Click **Save & build**, then **Preview**. This saves the source files and rebuilds the local website.
+6. In **GitHub Desktop**, select this repository, review and select the **Website** changes, write a commit message, commit to main, and **Push origin**. Leave unrelated learning-project changes unselected. The **Publish engineering portfolio** action rebuilds and publishes the website.
 
-| File or directory | Purpose |
+To change a project title, summary, main image, tools, or status, choose the project under **Project settings**, then **Edit project details**. Use **Add a project section** for a new group of text, equations, or images.
+
+The editor runs only on your computer. Saving locally does not update the public site until you push. Its local preview address is not a sharing URL. Close the terminal to stop the editor. Your public GitHub Pages site keeps working independently.
+
+The launcher uses the repository's Python environment when available, then the bundled Python or system Python. No packages or account subscription are needed. If a browser does not open automatically, copy the local URL printed in the terminal.
+
+## Where your content lives
+
+| File or folder | What you can edit |
 | --- | --- |
-| `build_portfolio.py` | Text, project information, page templates, and website URLs. |
-| `dist/assets/site.css` | Typography, colors, spacing, and responsive layout. |
-| `dist/assets/site.js` | Navigation, project filters, image viewer, and other interactions. |
-| `dist/assets/` | Images, favicon, CSS, and JavaScript required by the website. |
-| `asset-dimensions.json` | Image dimensions used to reserve space while images load. |
-| `tools/validate_site.py` | Checks local links, anchors, images, and page structure. |
-| `.openai/hosting.json` | Optional metadata identifying the existing Sites deployment. |
+| `content/projects.json` | Project cards, titles, summaries, metadata, and section order. |
+| `content/projects/<project>/*.html` | Each project section, editable visually in the local editor. |
+| `content/pages/*.html` | Home, about, experience, contact, resume, and detailed walkthroughs. |
+| `content/extra-pages.json` | Paths and titles for the detailed walkthroughs and derivation library. |
+| `content/evidence.json` | Handwritten preview-to-original-PDF records and excluded media. |
+| `public/assets/notes/` | Full-page handwritten previews. |
+| `public/assets/evidence/` | Selected CAD revisions and physical component photographs. |
+| `public/assets/uploads/` | Pictures added through the editor. |
+| `public/documents/uploads/` | Original PDFs added through the editor. |
+| `dist/assets/site.css` and `site.js` | The shared visual style and browser interactions. |
+| `build_portfolio.py` | Rebuilds the website from the editable content. |
 
-Edit page content in the Python builder. Rebuilding replaces generated HTML,
-the sitemap, and robots file. Keep the assets folder: the builder does not
-regenerate images, CSS, or JavaScript.
+Do not edit generated `dist/*.html` files: rebuilding replaces them. Original engineering files outside Website are unchanged. Large existing handwritten PDFs are linked from the public Learning material folder in this repository, rather than duplicated or loaded on every page visit.
 
-## Rebuild and check
+Home and resume source contain `<!--PROJECT_CARDS-->` and `<!--RESUME_PROJECTS-->` markers. The builder uses these to insert the current project summaries. Change those summaries through Project settings.
 
-From this repository's root, open PowerShell and run:
+## Preview or build from a terminal
 
-```powershell
-Set-Location Website
-python build_portfolio.py
-python tools/validate_site.py
-```
-
-The builder and validator use only Python's standard library. If `python` is
-not available on your PATH, the learning repository's interpreter can be used
-from inside this folder instead:
+From this repository root:
 
 ```powershell
-..\.venv\Scripts\python.exe build_portfolio.py
-..\.venv\Scripts\python.exe tools\validate_site.py
+.\.venv\Scripts\python.exe Website\tools\editor.py
 ```
 
-## Preview locally
-
-From inside this folder, run:
+For just a build and structural validation:
 
 ```powershell
-python -m http.server 4173 --directory dist
+.\.venv\Scripts\python.exe Website\build_portfolio.py
+.\.venv\Scripts\python.exe Website\tools\validate_site.py
 ```
 
-Open http://localhost:4173 and keep the terminal running while you preview.
-Press Ctrl+C in that terminal to stop the server. This address serves the site
-on your own computer; use the eventual published URL when sharing it.
+The editor and builder use Python's standard library. The editor handles image dimensions and file uploads itself.
 
-## Add images
+## Publication
 
-Save a new image as `.webp` in `dist/assets/`, then reference its filename
-without the extension inside the appropriate page's HTML string:
+GitHub Pages publishes only `Website/dist`, using `.github/workflows/portfolio-pages.yml`. Pushes to main that change Website trigger it automatically. GitHub Actions supplies the deployment origin and repository path so navigation, image URLs, and canonical links work at the project URL.
 
-```python
-{figure('actuator-test', 'Bench testing the revised actuator.',
-        'Photo of the actuator mounted on the test fixture.', photo=True)}
-```
+To publish to a different static host, set `PORTFOLIO_ORIGIN` to its origin and `PORTFOLIO_BASE_PATH` to its path prefix before building, then publish dist. Normal local previews use an empty base path. The local editor is a development tool and is never served by the static public website.
 
-Add its pixel width and height to `asset-dimensions.json`, using the existing
-entries as a guide. Rebuild and preview the affected page.
+The older ChatGPT-hosted copy is updated separately. Use GitHub Pages as the ongoing publication workflow when editing this repository yourself.
 
-## Publish later
+## Evidence and technical status
 
-GitHub Pages deployment is defined in
-`../.github/workflows/portfolio-pages.yml` with the name **Publish engineering
-portfolio**. In the repository's Settings > Pages, choose **GitHub Actions** as
-the publishing source. Pushing changes in this folder to `main` then builds,
-validates, and deploys only `Website/dist`. The Actions tab also offers a manual
-Run workflow button.
-
-The workflow reads the origin and repository path from GitHub Pages and passes
-`PORTFOLIO_ORIGIN` and `PORTFOLIO_BASE_PATH` to the Python builder. This keeps
-navigation, images, and metadata correct at the GitHub project URL. Running the
-builder normally keeps root-based local preview working.
-
-The directory to publish is `Website/dist` relative to the repository root.
-Configure a static host to serve that directory as the website root, or upload
-its contents. Python is used to generate the pages; the published site runs
-as ordinary HTML, CSS, JavaScript, and images.
-
-For another host, set `PORTFOLIO_ORIGIN` to its origin and, if needed, set
-`PORTFOLIO_BASE_PATH` to the URL prefix before rebuilding. These settings control
-navigation, assets, canonical links, social-preview URLs, the
-sitemap, robots metadata, and the portfolio URL printed on the résumé.
-
-For a GitHub Pages project URL such as
-`https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/`, use origin
-`https://littlemoomoo.github.io` and base path `/Littlemoomoo-Python-Learning`.
-The workflow does this automatically. The generated files stay directly in
-`dist`; the prefix is part of the URL, not an extra output directory.
-
-The `.openai/hosting.json` file contains only the original Sites project ID
-and static-directory setting; it contains no credentials. It can be retained
-as deployment metadata and is not required by other static hosts. Only `dist`
-needs to be served publicly.
-
-Original attachments, private research notes, screenshots of browser checks,
-and the original site's Git metadata are excluded from this folder. Project
-copy distinguishes built hardware, CAD studies, simulation checks, and work
-still in development.
+The rejected turquoise quadruped image is removed from source content and the public assets. The validator rejects that filename if it is accidentally reintroduced. Each handwritten preview is paired with its original PDF and page number. Team CAD, commercial development boards, reference architectures, exploratory measurements, saved numerical results, and unfinished hardware work are identified in their context.
