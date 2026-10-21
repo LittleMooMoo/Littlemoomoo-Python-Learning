@@ -92,5 +92,15 @@
   "excluded_assets": [
     "quadruped-hardware.webp"
   ],
-  "audit_date": "2026-10-21"
+  "audit_date": "2026-10-21",
+  "actuator_iteration": {
+    "clarified_on": "2026-10-21",
+    "source": "Project author clarification",
+    "main_improvements": [
+      "Output-shaft structure redesign",
+      "Gear-profile clearance refinement"
+    ],
+    "result": "Qualitative improvement in efficiency and back-driving",
+    "quantified_comparison": false
+  }
 }
