@@ -2,20 +2,20 @@
 
 The live GitHub Pages site is https://littlemoomoo.github.io/Littlemoomoo-Python-Learning/ .
 
-## Edit without changing Python or HTML
+## Edit without writing code
 
-1. Double-click **OPEN_EDITOR.cmd** in this folder. Keep its terminal open while editing.
-2. The local browser editor opens. Choose a page or project section from the left.
-3. Click the text to edit it. Use the toolbar for headings, lists, and links.
-4. Expand **Add a photograph, drawing, or original PDF** to choose a file. Add a caption and alternative text. A handwritten preview can include its original PDF link.
-5. Click **Save & build**, then **Preview**. This saves the source files and rebuilds the local website.
-6. In **GitHub Desktop**, select this repository, review and select the **Website** changes, write a commit message, commit to main, and **Push origin**. Leave unrelated learning-project changes unselected. The **Publish engineering portfolio** action rebuilds and publishes the website.
+1. In File Explorer, open this repository's **Website** folder and double-click **OPEN_EDITOR.cmd**. A terminal opens, then the browser editor. Keep the terminal open while you work.
+2. Choose **Home**, **About & education**, or a project section from the list on the left. Click the text in the white editing area to change it. Use the toolbar for headings, lists, and links.
+3. To add a picture, put the cursor where it belongs and expand **Add a photograph, drawing, or original PDF**. Enter a caption and an image description, then choose **Upload & insert image**.
+4. For handwritten notes, upload the original PDF first. The editor inserts its link and fills in **Original PDF link (optional)**. Upload the preview image with that link attached so readers can open the full notes.
+5. Click **Save & build** and wait for **Saved. Build and site checks passed.**, then click **Preview**. Check the page and its links. If checks fail, open **Build details** and resolve the issue before publishing. Saving changes the files on your computer; publishing comes next.
+6. Open **GitHub Desktop** and select **Littlemoomoo-Python-Learning**. Select only the **Website** changes you want to publish, write a short commit message, click **Commit to main**, then **Push origin**. The **Publish engineering portfolio** workflow publishes the update. Unrelated learning-project files can stay unselected.
 
-To change a project title, summary, main image, tools, or status, choose the project under **Project settings**, then **Edit project details**. Use **Add a project section** for a new group of text, equations, or images.
+For a project title, summary, main image, tools, or status, choose the project under **Project settings** and click **Edit project details**. Use **Add a project section** when you need another section on that project's page.
 
-The editor runs only on your computer. Saving locally does not update the public site until you push. Its local preview address is not a sharing URL. Close the terminal to stop the editor. Your public GitHub Pages site keeps working independently.
+If the browser does not open, copy the local editor URL printed in the terminal. That address works only on your computer while the terminal is open. Share the public GitHub Pages URL with employers and professors.
 
-The launcher uses the repository's Python environment when available, then the bundled Python or system Python. No packages or account subscription are needed. If a browser does not open automatically, copy the local URL printed in the terminal.
+Close the terminal when you finish editing. The public website stays online. The launcher uses the repository's Python environment, the bundled Python, or system Python; it needs no extra packages.
 
 ## Where your content lives
 

@@ -88,16 +88,17 @@ def header(active):
     return f'''<a class="skip" href="#main">Skip to content</a><header class="site-header"><div class="wrap nav-inner"><a href="/" class="brand" aria-label="Jiale Jiang home"><span class="brand-mark" aria-hidden="true">JJ</span><span>Jiale Jiang<span class="brand-sub">Engineering portfolio</span></span></a><button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav"><svg width="21" height="18" viewBox="0 0 21 18" aria-hidden="true"><path d="M1 5h19M1 13h19" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button><nav class="nav-links" id="main-nav" aria-label="Main navigation">{links}<a class="nav-resume" href="/resume/">Résumé ↗</a></nav></div></header>'''
 
 def footer():
-    return f'''<footer class="site-footer"><div class="wrap"><div class="footer-inner"><span>© 2026 Jiale Jiang · Southern California</span><div class="footer-links"><a href="{LINKEDIN}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:{EMAIL}">Email ↗</a></div></div><p class="footer-note">Project photographs, CAD, and technical work from my engineering practice. Team contributions and development stages are described on each project page.</p></div></footer>'''
+    return f'''<footer class="site-footer"><div class="wrap"><div class="footer-inner"><span>© 2026 Jiale Jiang · Southern California</span><div class="footer-links"><a href="{LINKEDIN}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="{GITHUB}" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:{EMAIL}">Email ↗</a></div></div><p class="footer-note">Designs, prototypes, and notes from my engineering projects. Each project page explains my role, the work with teammates, and its current stage.</p></div></footer>'''
 
 def closing():
-    return f'''<section class="closing dark"><div class="wrap closing-inner"><div><span class="eyebrow">NEXT CONVERSATION</span><h2>Let’s talk engineering.</h2><p>Robotics internships, research, and people who enjoy building things.</p></div>{anchor('/contact/','Get in touch',cls='pill')}</div></section>'''
+    return f'''<section class="closing dark"><div class="wrap closing-inner"><div><span class="eyebrow">GET IN TOUCH</span><h2>Let’s talk engineering.</h2><p>I’m interested in robotics internships, research, and engineering projects I can contribute to.</p></div>{anchor('/contact/','Get in touch',cls='pill')}</div></section>'''
 
 def page(path,title,description,body,active='',include_closing=False):
     name = {'/':'home'}.get(path, path.strip('/'))
     editable = ROOT/'content'/'pages'/(name+'.html')
     if editable.is_file():
         body = editable.read_text(encoding='utf-8')
+    body = body.replace('<!--PORTFOLIO_URL-->', escape(ORIGIN))
     body = body.replace('<!--PROJECT_CARDS-->', ''.join(card(p) for p in PROJECTS[:4]))
     entries = ''.join(f'<article class="resume-entry"><h3><a href="/projects/{p["slug"]}/">{p["title"]} ↗</a></h3><p class="date">{p["role"]} · {p["period"]}</p><p>{p["summary"]} {p["stage"]}.</p></article>' for p in PROJECTS)
     body = body.replace('<!--RESUME_PROJECTS-->', entries)
@@ -131,8 +132,8 @@ def build_home():
     page('/','Robotics & Engineering Portfolio','Jiale Jiang is a mechanical engineering student building robotics projects across CAD, actuator design, electronics, and control software.',body,include_closing=True)
 
 def build_projects():
-    body=f'''<div class="wrap"><header class="page-heading"><span class="eyebrow">ENGINEERING PROJECTS</span><h1>The work,<br>and the reasoning behind it.</h1><p class="lede">Mechanisms, electronics, analysis, and control. Each project explains my contribution, the evidence, and the next engineering question.</p></header><section class="section-small" style="padding-top:8px"><div class="filters" role="group" aria-label="Filter projects"><button class="filter" data-filter="all" aria-pressed="true">All work</button><button class="filter" data-filter="mechanical" aria-pressed="false">Mechanical design</button><button class="filter" data-filter="electronics" aria-pressed="false">Electronics</button><button class="filter" data-filter="controls" aria-pressed="false">Control & simulation</button></div><p id="filter-status" class="skip" aria-live="polite"></p><div class="projects-grid">{''.join(card(p) for p in PROJECTS)}</div></section></div>'''
-    page('/projects/','Engineering projects','Explore Jiale Jiang’s engineering case studies in quadruped robotics, actuator design, motor control, simulation, and underwater thrusters.',body,'projects',True)
+    body=f'''<div class="wrap"><header class="page-heading"><span class="eyebrow">ENGINEERING PROJECTS</span><h1>Engineering<br>projects.</h1><p class="lede">These projects show what I designed, how I approached the problems, and what I’m still working on.</p></header><section class="section-small" style="padding-top:8px"><div class="filters" role="group" aria-label="Filter projects"><button class="filter" data-filter="all" aria-pressed="true">All work</button><button class="filter" data-filter="mechanical" aria-pressed="false">Mechanical design</button><button class="filter" data-filter="electronics" aria-pressed="false">Electronics</button><button class="filter" data-filter="controls" aria-pressed="false">Control & simulation</button></div><p id="filter-status" class="skip" aria-live="polite"></p><div class="projects-grid">{''.join(card(p) for p in PROJECTS)}</div></section></div>'''
+    page('/projects/','Engineering projects','Jiale Jiang’s projects in quadruped robotics, actuator design, motor control, simulation, and underwater thrusters.',body,'projects',True)
 
 def build_case_studies():
     for p in PROJECTS:
@@ -169,7 +170,7 @@ def build_resume():
     page('/resume/','Résumé','A printable professional overview of Jiale Jiang’s engineering projects, education, skills, and work experience.',body)
 
 def build_404():
-    doc=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Jiale Jiang</title><link rel="stylesheet" href="/assets/site.css"></head><body>{header('')}<main id="main" class="wrap section"><span class="eyebrow">404</span><h1>That page isn’t here.</h1><p class="lede" style="margin-top:24px">You can return to the portfolio or explore the project pages.</p><div class="actions">{anchor('/','Home',cls='pill')}{anchor('/projects/','Projects',cls='pill secondary')}</div></main>{footer()}<script src="/assets/site.js" defer></script></body></html>'''
+    doc=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Jiale Jiang</title><link rel="stylesheet" href="/assets/site.css"></head><body>{header('')}<main id="main" class="wrap section"><span class="eyebrow">404</span><h1>That page isn’t here.</h1><p class="lede" style="margin-top:24px">Visit the home page or browse my projects.</p><div class="actions">{anchor('/','Home',cls='pill')}{anchor('/projects/','Projects',cls='pill secondary')}</div></main>{footer()}<script src="/assets/site.js" defer></script></body></html>'''
     (OUT/'404.html').write_text(rewrite_site_urls(doc),encoding='utf-8')
 
 def main():

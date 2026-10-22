@@ -4,20 +4,20 @@
     "title": "Modular quadruped",
     "kind": "Robotics · System integration",
     "category": "mechanical controls",
-    "status": "Hardware built · Locomotion in development",
+    "status": "Hardware built · Walking in development",
     "image": "quadruped-hero",
     "alt": "Revised SolidWorks assembly of the twelve-joint quadruped.",
-    "summary": "A twelve-joint robot developed through mechanical revisions, handwritten kinematics, and staged control integration.",
+    "summary": "A twelve-joint robot built with teammates, from printed mechanisms to kinematics and motor control.",
     "role": "Project lead · Robotics developer",
     "period": "September 2025 — present",
     "tools": "SolidWorks · FDM · C++ / Eigen",
-    "stage": "Built platform; gait development",
-    "lede": "A collaborative twelve-joint robot, documented through CAD revisions, printed components, handwritten mathematics, and evolving control code.",
-    "hero_caption": "My team’s revised quadruped CAD. Full-robot design views on this page are CAD; component photographs are identified separately.",
+    "stage": "Hardware built; walking control in development",
+    "lede": "I work on the mechanical design and control software for a twelve-joint quadruped, using CAD, printed prototypes, and handwritten derivations to guide each revision.",
+    "hero_caption": "Our revised quadruped CAD, showing the frame, actuators, and leg layout.",
     "sections": [
       {
         "id": "overview",
-        "title": "A mechanism, then a system",
+        "title": "Building the quadruped",
         "file": "projects/quadruped/overview.html"
       },
       {
@@ -27,22 +27,22 @@
       },
       {
         "id": "hardware",
-        "title": "From CAD to a printed component",
+        "title": "Printing and checking the frame",
         "file": "projects/quadruped/hardware.html"
       },
       {
         "id": "kinematics",
-        "title": "The derivations behind the motion",
+        "title": "Working through the leg geometry",
         "file": "projects/quadruped/kinematics.html"
       },
       {
         "id": "integration",
-        "title": "Integrate through smaller tests",
+        "title": "Testing one leg at a time",
         "file": "projects/quadruped/integration.html"
       },
       {
         "id": "status",
-        "title": "What the project has demonstrated",
+        "title": "Results and current work",
         "file": "projects/quadruped/status.html"
       }
     ]
@@ -55,13 +55,13 @@
     "status": "Built prototypes · Design iteration",
     "image": "cycloidal-actuator-cad",
     "alt": "Cycloidal actuator CAD with a circular output flange and printed enclosure.",
-    "summary": "Actuator iterations driven by an early back-driving problem, mechanical losses, fit, and measured testing.",
+    "summary": "Printed robotic joints, revised to improve efficiency and back-driving through output-shaft design and gear clearance.",
     "role": "Mechanical designer · Test engineer",
     "period": "September 2025 — present",
     "tools": "SolidWorks · FDM · Bench testing",
     "stage": "Prototypes built; revisions ongoing",
-    "lede": "Printed cycloidal joints, beginning with an efficiency and back-driving problem and developing through geometry, bearing, packaging, and test revisions.",
-    "hero_caption": "Cycloidal actuator CAD showing the printed enclosure, output mounting pattern, and surrounding hardware.",
+    "lede": "I developed printed cycloidal actuators for the quadruped, then revised the output-shaft structure and gear-profile clearance after early prototypes resisted back-driving.",
+    "hero_caption": "Cycloidal actuator CAD with the printed housing and output mounting pattern.",
     "sections": [
       {
         "id": "problem",
@@ -70,22 +70,22 @@
       },
       {
         "id": "geometry",
-        "title": "Start with the disk, pins, and bearing stack",
+        "title": "Disk geometry and bearing support",
         "file": "projects/cycloidal-actuator/geometry.html"
       },
       {
         "id": "iterations",
-        "title": "What I changed and investigated",
+        "title": "What I changed",
         "file": "projects/cycloidal-actuator/iterations.html"
       },
       {
         "id": "tests",
-        "title": "Build a way to measure the next revision",
+        "title": "Measuring the prototypes",
         "file": "projects/cycloidal-actuator/tests.html"
       },
       {
         "id": "next",
-        "title": "The actuation question carried forward",
+        "title": "What I’m exploring next",
         "file": "projects/cycloidal-actuator/next.html"
       }
     ]
@@ -98,23 +98,23 @@
     "status": "Prototype PCB · CAN integration",
     "image": "actuator-prototype",
     "alt": "Unpopulated prototype controller PCB fitted to a printed actuator housing.",
-    "summary": "PCB development, encoder circuits, and the software between a desired motion and a motor command.",
+    "summary": "Prototype controller boards, encoder circuits, and CAN software for the robot’s motors.",
     "role": "PCB & embedded developer",
     "period": "September 2025 — present",
     "tools": "KiCad · STM32 · SocketCAN",
-    "stage": "Board bring-up incomplete",
+    "stage": "Prototype assembled; board bring-up incomplete",
     "photo": true,
-    "lede": "Working across prototype PCBs, encoder feedback, embedded firmware, and CAN communication.",
-    "hero_caption": "Fabricated, unpopulated controller PCB fitted to an actuator housing for packaging checks.",
+    "lede": "I worked on controller-board development and the firmware and CAN interfaces that connect the robot’s software to its motors.",
+    "hero_caption": "An unpopulated prototype controller PCB fitted to the actuator housing to check its size and mounting.",
     "sections": [
       {
         "id": "challenge",
-        "title": "The interfaces between hardware and motion",
+        "title": "From a controller board to a motor command",
         "file": "projects/motor-control/challenge.html"
       },
       {
         "id": "design",
-        "title": "Electronics and prototype evidence",
+        "title": "Schematic, PCB, and assembly",
         "file": "projects/motor-control/design.html"
       },
       {
@@ -124,7 +124,7 @@
       },
       {
         "id": "outcome",
-        "title": "What worked, and what needs another revision",
+        "title": "Board bring-up and the next revision",
         "file": "projects/motor-control/outcome.html"
       }
     ]
@@ -137,27 +137,27 @@
     "status": "CAD design study",
     "image": "qdd-planetary-section",
     "alt": "Quasi-direct-drive actuator CAD exposing the sun, planet, and ring gears.",
-    "summary": "A compact planetary actuator study balancing reduction geometry and motor packaging.",
+    "summary": "A planetary actuator CAD study focused on reduction ratio, gear geometry, and compact packaging.",
     "role": "Mechanical design & integration",
     "period": "2026 — present",
     "tools": "SolidWorks · Gear geometry",
     "stage": "CAD and packaging study",
-    "lede": "A compact planetary actuator study exploring the relationship between gear geometry, reduction, and motor packaging.",
-    "hero_caption": "Planetary QDD CAD cutaway. This is a design-study assembly, not evidence of a manufactured and performance-tested actuator.",
+    "lede": "After working with cycloidal joints, I began exploring a lower-reduction planetary actuator and the tradeoffs between torque, responsiveness, and packaging.",
+    "hero_caption": "A cutaway of the planetary QDD design study, showing how the gears fit inside the motor package.",
     "sections": [
       {
         "id": "challenge",
-        "title": "Revisiting the actuation tradeoff",
+        "title": "Exploring lower-reduction actuation",
         "file": "projects/planetary-qdd/challenge.html"
       },
       {
         "id": "geometry",
-        "title": "Start with the geometric relationships",
+        "title": "Checking the gear geometry",
         "file": "projects/planetary-qdd/geometry.html"
       },
       {
         "id": "design",
-        "title": "What I’m working through",
+        "title": "Packaging and assembly questions",
         "file": "projects/planetary-qdd/design.html"
       },
       {
@@ -172,26 +172,26 @@
     "title": "Simulation & control",
     "kind": "Kinematics · Modeling · Learning",
     "category": "controls",
-    "status": "Model validation · Learning in development",
+    "status": "Kinematics checked · Learning in development",
     "image": "robot-simulation",
     "alt": "CAD-derived quadruped model in a dark MuJoCo scene.",
-    "summary": "Handwritten derivations, analytical C++ kinematics, model checks, and a continuing control and learning study.",
+    "summary": "Leg kinematics derived by hand and checked in code, alongside a CAD-based simulation model.",
     "role": "Controls & simulation developer",
     "period": "2026 — present",
     "tools": "C++ / Eigen · MuJoCo · Python",
-    "stage": "Pipeline checks; policy development",
+    "stage": "Model checks and policy development",
     "black": true,
-    "lede": "The evolution from geometric leg models to analytical Jacobians, explicit frame conventions, offline verification, and further control study.",
-    "hero_caption": "MuJoCo preview of the CAD-derived articulated robot model. A simulation scene is not a demonstration of learned walking.",
+    "lede": "I derive the leg models, compare coordinate conventions, and check the mathematics before using it in the controller.",
+    "hero_caption": "The CAD-derived quadruped model in MuJoCo, used for modeling and control experiments.",
     "sections": [
       {
         "id": "approach",
-        "title": "One mechanism, several ways to check the model",
+        "title": "Checking the leg model",
         "file": "projects/simulation-control/approach.html"
       },
       {
         "id": "notes",
-        "title": "From sketches to differential kinematics",
+        "title": "From sketches to a Jacobian",
         "file": "projects/simulation-control/notes.html"
       },
       {
@@ -201,7 +201,7 @@
       },
       {
         "id": "verification",
-        "title": "What the saved numerical checks say",
+        "title": "The saved numerical results",
         "file": "projects/simulation-control/verification.html"
       },
       {
@@ -211,7 +211,7 @@
       },
       {
         "id": "study",
-        "title": "Control and learning: the next questions",
+        "title": "Further control and learning work",
         "file": "projects/simulation-control/study.html"
       }
     ]
@@ -224,13 +224,13 @@
     "status": "CFD study · Prototype testing",
     "image": "rov-thruster-cad",
     "alt": "CAD design of a ducted propeller for a remotely operated underwater vehicle.",
-    "summary": "A ducted underwater thruster developed through CAD, flow simulation, and prototype tests.",
+    "summary": "A ducted underwater thruster developed through CAD, flow simulation, and prototype testing.",
     "role": "Mechanical design lead",
     "period": "June — October 2025",
     "tools": "SolidWorks · Flow Simulation",
     "stage": "Prototype designed and tested",
-    "lede": "A ducted propeller for an underwater ROV, developed through mechanical design, flow simulation, and prototype testing.",
-    "hero_caption": "Ducted thruster CAD developed for the underwater ROV project.",
+    "lede": "As mechanical design lead, I developed a ducted ROV thruster and worked with the electrical team to fabricate, integrate, and test it.",
+    "hero_caption": "The duct, propeller, and mounting structure of the ROV thruster CAD.",
     "sections": [
       {
         "id": "challenge",
@@ -239,12 +239,12 @@
       },
       {
         "id": "analysis",
-        "title": "Use flow analysis to inform the geometry",
+        "title": "Comparing the flow in simulation",
         "file": "projects/rov-thruster/analysis.html"
       },
       {
         "id": "testing",
-        "title": "Prototype and team integration",
+        "title": "Building and testing the thruster",
         "file": "projects/rov-thruster/testing.html"
       },
       {
