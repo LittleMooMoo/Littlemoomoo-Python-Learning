@@ -1,0 +1,70 @@
+<mujoco model="diff_car">
+  <option gravity="0 0 -9.81" />
+  <asset>
+    <texture name="floor_texture" type="2d" builtin="checker" rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4" width="1024"
+      height="1024" />
+
+    <material name="floor_material" texture="floor_texture" texrepeat="5 5" texuniform="true" reflectance="0.1" />
+  </asset>
+  <worldbody>
+    <light pos="0 0 100" dir="0 0 -1" />
+
+    <geom name="floor" type="plane" size="10 10 0.1" material="floor_material" />
+
+    <body name="chasis" pos="0 0 0.5" euler="0 0 0">
+      <joint type="free" axis="-1 0 0" pos="0 0 -0.5" />
+      <geom type="box" size="0.8 0.5 0.03" mass="0.5" rgba="1 1 0 1" />
+
+       <body name="Fleft_wheel" pos="-0.8 0.6 0" euler="90 0 0">
+        <joint name="Fleft_axle" type="hinge" axis="0 0 1" pos="0 0 0" />
+        <geom type="cylinder" size="0.5 0.03" mass="0.1" friction="1 .001 .0001" rgba="1 0 0 1" />
+        <!-- Visual rotation marks on both wheel faces -->
+        <geom type="box" pos="0.23 0 0.102" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+        <geom type="box" pos="0.23 0 -0.102" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+      </body>
+
+      <body name="Fright_wheel" pos="-0.8 -0.6 0" euler="90 0 0">
+        <joint name="Fright_axle" type="hinge" axis="0 0 1" pos="0 0 0" />
+        <geom type="cylinder" size="0.5 0.03" mass="0.1" friction="1 .001 .0005" rgba="1 0 0 1" />
+        <!--the friction shown is [sliding torsional rolling] friction, not xyz-->
+        <!-- Visual rotation marks on both wheel faces -->
+        <geom type="box" pos="0.23 0 0.062" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+        <geom type="box" pos="0.23 0 -0.062" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+      </body>
+
+      <body name="Rleft_wheel" pos="0.8 0.6 0" euler="90 0 0">
+        <joint name="Rleft_axle" type="hinge" axis="0 0 1" pos="0 0 0" />
+        <geom type="cylinder" size="0.5 0.03" mass="0.1" friction="1 .001 .0001" rgba="1 0 0 1" />
+        <!-- Visual rotation marks on both wheel faces -->
+        <geom type="box" pos="0.23 0 0.102" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+        <geom type="box" pos="0.23 0 -0.102" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+      </body>
+
+      <body name="Rright_wheel" pos="0.8 -0.6 0" euler="90 0 0">
+        <joint name="Rright_axle" type="hinge" axis="0 0 1" pos="0 0 0" />
+        <geom type="cylinder" size="0.5 0.03" mass="0.1" friction="1 .001 .0005" rgba="1 0 0 1" />
+        <!--the friction shown is [sliding torsional rolling] friction, not xyz-->
+        <!-- Visual rotation marks on both wheel faces -->
+        <geom type="box" pos="0.23 0 0.062" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+        <geom type="box" pos="0.23 0 -0.062" size="0.20 0.025 0.002" rgba="1 1 1 1" contype="0" conaffinity="0"
+          density="0" />
+      </body>
+
+    </body>
+  </worldbody>
+  <actuator>
+    <!--actuator fundementally drives the joint by torque, it does not give instant position or velocity control-->
+    <!--the actuator can control position,velocity or torque of the joint-->
+    <position name="Fleft_motor_pos" joint="Fleft_axle" gear="1" ctrllimited="true" ctrlrange="-50 50" kp="20" kv="2" />
+    <position name="Fright_motor_pos" joint="Fright_axle" gear="1" ctrllimited="true" ctrlrange="-50 50" kp="20" kv="2" />
+    <position name="Rleft_motor_pos" joint="Rleft_axle" gear="1" ctrllimited="true" ctrlrange="-50 50" kp="20" kv="2" />
+    <position name="Rright_motor_pos" joint="Rright_axle" gear="1" ctrllimited="true" ctrlrange="-50 50" kp="20" kv="2" />
+  </actuator>
+</mujoco>
