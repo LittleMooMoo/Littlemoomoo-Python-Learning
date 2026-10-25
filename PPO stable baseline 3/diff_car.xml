@@ -61,11 +61,11 @@
     <!--actuator fundementally drives the joint by torque, it does not give instant position or velocity control-->
     <!--the actuator can control position,velocity or torque of the joint-->
     <position name="left_motor_pos" joint="left_axle"
-           gear="1" ctrllimited="true" ctrlrange="-50 50"
+           gear="1" ctrllimited="true" ctrlrange="-100 100"
            kp="20"
            kv="2"/>
     <position name="right_motor_pos" joint="right_axle"
-           gear="1" ctrllimited="true" ctrlrange="-50 50"
+           gear="1" ctrllimited="true" ctrlrange="-100 100"
            kp="20"
            kv="2"/>
   </actuator>

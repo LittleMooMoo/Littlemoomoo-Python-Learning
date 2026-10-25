@@ -19,4 +19,8 @@ int main()
     int idd;
     idd = motor.getid();
     std::cout << "configs: " << idd;
+    if (a == b)
+    {
+        a = 1
+    }
 }
