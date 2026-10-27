@@ -35,7 +35,9 @@ Close the terminal when you finish editing. The public website stays online. The
 
 Do not edit generated `dist/*.html` files: rebuilding replaces them. Original engineering files outside Website are unchanged. Large existing handwritten PDFs are linked from the public Learning material folder in this repository, rather than duplicated or loaded on every page visit.
 
-Home and resume source contain `<!--PROJECT_CARDS-->` and `<!--RESUME_PROJECTS-->` markers. The builder uses these to insert the current project summaries. Change those summaries through Project settings.
+Home source contains a `<!--PROJECT_CARDS-->` marker. The builder uses it to insert the current project summaries. Change those summaries through Project settings.
+
+The résumé page uses the concise selection in `content/pages/resume.html`. Its **Download résumé (PDF)** button serves `public/documents/Jiale_Jiang_Robotics_Resume2027_Concise.pdf`. To update it later, replace that PDF and edit the Résumé page to match, then save, preview, and publish. The builder copies the PDF into the public website without changing its contents.
 
 ## Preview or build from a terminal
 
